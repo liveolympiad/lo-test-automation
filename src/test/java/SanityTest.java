@@ -1,21 +1,23 @@
 //package firsttestngpackage;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 @Test
 public class SanityTest {
     public String baseUrl = "https://app.liveolympiad.org/";
-    String driverPath = "src/test/resources/geckodriver";
+    String driverPath = "src/test/resources/chromedriver";
     public WebDriver driver;
     public String expected = null;
     public String actual = null;
     @BeforeTest
     public void launchBrowser() {
-        System.out.println("launching firefox browser");
-        System.setProperty("webdriver.gecko.driver", driverPath);
-        driver= new FirefoxDriver();
+        System.out.println("launching chrome browser");
+        System.setProperty("webdriver.chrome.driver", driverPath);
+        driver = new ChromeDriver();
         driver.get(baseUrl);
     }
 
