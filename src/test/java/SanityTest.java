@@ -1,14 +1,13 @@
-//package firsttestngpackage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 @Test
 public class SanityTest {
-    public String baseUrl = "https://app.liveolympiad.org/";
+    public String baseUrl = "https://app-uat.liveolympiad.org/";
     String driverPath = "src/test/resources/chromedriver";
     public WebDriver driver;
     public String expected = null;
@@ -23,16 +22,31 @@ public class SanityTest {
 
     @BeforeMethod
     public void verifyHomepageTitle() {
-        String expectedTitle = "Welcome: Mercury Tours";
+        String expectedTitle = "LiveOlympiad";
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 0)
-    public void register(){
-        driver.findElement(By.linkText("REGISTER")).click() ;
-        expected = "Register: Mercury Tours";
-        actual = driver.getTitle();
-        Assert.assertEquals(actual, expected);
+    public void loginNoPhoneNumberEntered(){
+        driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        expected = "Please enter valid phone number";
+        WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
+    }
+
+    @Test(priority = 0)
+    public void login(){
+        driver.findElement(By.xpath(
+                "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[3]/div/div/div/input"))
+                .sendKeys("9958895489");
+        driver.findElement(By.xpath(
+                "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[4]/div/div/div/input"))
+                .sendKeys("123456");
+        driver.findElement(
+                By.xpath(
+                        "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button"))
+                .click();
     }
     @Test(priority = 1)
     public void support() {
@@ -48,6 +62,8 @@ public class SanityTest {
 
     @AfterTest
     public void terminateBrowser(){
-        driver.close();
+        if (driver != null) {
+            driver.close();
+        }
     }
 }
