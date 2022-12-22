@@ -48,17 +48,17 @@ public class SanityTest {
                         "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button"))
                 .click();
     }
-    @Test(priority = 1)
+    /*@Test (priority = 1)
     public void support() {
         driver.findElement(By.linkText("SUPPORT")).click() ;
         expected = "Under Construction: Mercury Tours";
         actual = driver.getTitle();
         Assert.assertEquals(actual, expected);
-    }
-    @AfterMethod
+    }*/
+    /*@AfterMethod
     public void goBackToHomepage ( ) {
         driver.findElement(By.linkText("Home")).click() ;
-    }
+    }*/
 
     @AfterTest
     public void terminateBrowser(){
