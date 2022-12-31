@@ -41,6 +41,7 @@ public class SanityTest {
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+
     @Test(priority = 0)
     public void loginNoPhoneNumberEntered(){
         driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
