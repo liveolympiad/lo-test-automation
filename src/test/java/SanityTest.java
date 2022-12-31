@@ -40,7 +40,7 @@ public class SanityTest {
     }
 
     @Test(priority = 0)
-    public void login(){
+    public void login() throws InterruptedException {
         driver.findElement(By.xpath(
                 "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[3]/div/div/div/input"))
                 .sendKeys("9958895489");
@@ -51,15 +51,20 @@ public class SanityTest {
                 By.xpath(
                         "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button"))
                 .click();
-        waitForElement("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button");
+        WebElement elem = waitForElement("//*[@id=\"root\"]/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        elem = waitForElement("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
+        elem.click();
     }
 
-    private void waitForElement(String elemStr) {
+    private WebElement waitForElement(String elemStr) throws InterruptedException {
+        Thread.sleep(10000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        By logoutButton = By.xpath(elemStr);
-
+        By elemLocator = By.xpath(elemStr);
+        WebElement elem = driver.findElement(elemLocator);
         // wait till the logout button is visible
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(logoutButton)));
+        wait.until(ExpectedConditions.visibilityOf(elem));
+        return elem;
     }
     /*@Test (priority = 1)
     public void support() {
