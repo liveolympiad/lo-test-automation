@@ -11,11 +11,21 @@ import java.time.Duration;
 
 @Test
 public class SanityTest {
-    public String baseUrl = "https://app.liveolympiad.org/";
-    String driverPath = "src/test/resources/chromedriver";
-    public WebDriver driver;
-    public String expected = null;
-    public String actual = null;
+    private final String baseUrl = "https://app.liveolympiad.org/";
+    private final String driverPath = "src/test/resources/chromedriver";
+    private WebDriver driver;
+
+
+    private WebElement waitForElement(String elemStr) throws InterruptedException {
+        Thread.sleep(10000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        By elemLocator = By.xpath(elemStr);
+        WebElement elem = driver.findElement(elemLocator);
+        // wait till the logout button is visible
+        wait.until(ExpectedConditions.visibilityOf(elem));
+        return elem;
+    }
+
     @BeforeTest
     public void launchBrowser() {
         System.out.println("launching chrome browser");
@@ -33,7 +43,7 @@ public class SanityTest {
     @Test(priority = 0)
     public void loginNoPhoneNumberEntered(){
         driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
-        expected = "Please enter valid phone number";
+        String expected = "Please enter valid phone number";
         WebElement elem = driver.findElement(By.xpath(""));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
@@ -58,15 +68,6 @@ public class SanityTest {
         waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div");
     }
 
-    private WebElement waitForElement(String elemStr) throws InterruptedException {
-        Thread.sleep(10000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        By elemLocator = By.xpath(elemStr);
-        WebElement elem = driver.findElement(elemLocator);
-        // wait till the logout button is visible
-        wait.until(ExpectedConditions.visibilityOf(elem));
-        return elem;
-    }
     /*@Test (priority = 1)
     public void support() {
         driver.findElement(By.linkText("SUPPORT")).click() ;
