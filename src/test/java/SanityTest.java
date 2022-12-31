@@ -11,6 +11,7 @@ import java.time.Duration;
 
 @Test
 public class SanityTest {
+    //private final String baseUrl = "https://app-uat.liveolympiad.org/";
     private final String baseUrl = "https://app.liveolympiad.org/";
     private final String driverPath = "src/test/resources/chromedriver";
     private WebDriver driver;
