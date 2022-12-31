@@ -2,8 +2,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.time.Duration;
 
 @Test
 public class SanityTest {
@@ -47,6 +51,15 @@ public class SanityTest {
                 By.xpath(
                         "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button"))
                 .click();
+        waitForElement("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button");
+    }
+
+    private void waitForElement(String elemStr) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        By logoutButton = By.xpath(elemStr);
+
+        // wait till the logout button is visible
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(logoutButton)));
     }
     /*@Test (priority = 1)
     public void support() {
