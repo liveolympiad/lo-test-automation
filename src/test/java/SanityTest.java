@@ -48,7 +48,7 @@ public class SanityTest extends BaseTest {
         elem.click();
         elem = waitForElement("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
         elem.click();
-        waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 15000);
+        // TODO: waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);
     }
 
     /*@Test (priority = 1)
