@@ -1,14 +1,13 @@
+package Tests;
+
 import PageObjectModel.LoginPage;
+import Tests.BaseTest;
+import Utils.Utils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.time.Duration;
 
 @Test
 public class SanityTest extends BaseTest {
@@ -18,6 +17,7 @@ public class SanityTest extends BaseTest {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.get(baseUrl);
+        utils = new Utils(driver);
     }
 
     @BeforeMethod
@@ -40,15 +40,17 @@ public class SanityTest extends BaseTest {
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
-        driver.findElement(
-                By.xpath(
-                        "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button"))
-                .click();
-        WebElement elem = waitForElement("//*[@id=\"root\"]/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
         elem.click();
-        elem = waitForElement("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
+        Thread.sleep(5000);
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
         elem.click();
-        // TODO: waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);
+        Thread.sleep(4000);
+        utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);
     }
 
     /*@Test (priority = 1)

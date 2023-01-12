@@ -9,9 +9,12 @@ public class DalJNI {
     }
 
     public static void main(String[] args) {
-        new DalJNI().sayHello();
+        new DalJNI().connectToMongoDb();
+        new DalJNI().connectToPostgresDb();
     }
 
     // Declare a native method sayHello() that receives no arguments and returns void
-    private native void sayHello();
+    private native void connectToMongoDb();
+
+    private native void connectToPostgresDb();
 }
