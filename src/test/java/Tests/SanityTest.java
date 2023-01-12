@@ -49,7 +49,7 @@ public class SanityTest extends BaseTest {
         elem = utils.waitForElement(
                 "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
         elem.click();
-        Thread.sleep(4000);
+        Thread.sleep(7000);
         utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);
     }
 
