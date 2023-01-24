@@ -14,7 +14,6 @@ public class BaseTest {
     protected final String baseUrl = "https://app.liveolympiad.org/";
     protected final String driverPath = "src/test/resources/chromedriver";
     protected WebDriver driver;
-    protected WebClient webClient;
 
     protected Utils utils;
 
