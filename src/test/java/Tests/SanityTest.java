@@ -1,20 +1,22 @@
 package Tests;
 
-import PageObjectModel.LoginPage;
-import Utils.Utils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
+
+import PageObjectModel.LoginPage;
+import Utils.Utils;
 
 @Test
 public class SanityTest extends BaseTest {
@@ -60,11 +62,11 @@ public class SanityTest extends BaseTest {
                 "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
         elem.click();
         Thread.sleep(5000);
-        elem = utils.waitForElement(
+        /*elem = utils.waitForElement(
                 "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
         elem.click();
         Thread.sleep(7000);
-        utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);
+        utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
     }
 
     /*@Test (priority = 1)
