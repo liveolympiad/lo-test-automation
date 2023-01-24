@@ -3,12 +3,9 @@ package Tests;
 import PageObjectModel.LoginPage;
 import Utils.Utils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +15,6 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
-import static org.openqa.selenium.remote.Browser.HTMLUNIT;
 
 @Test
 public class SanityTest extends BaseTest {
@@ -31,7 +27,7 @@ public class SanityTest extends BaseTest {
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
-            driver = new ChromeDriver(options).;
+            driver = new ChromeDriver(options);
         }
         driver.get(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
