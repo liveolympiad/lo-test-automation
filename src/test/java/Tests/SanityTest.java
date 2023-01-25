@@ -22,10 +22,9 @@ import Utils.Utils;
 public class SanityTest extends BaseTest {
     @BeforeTest
     public void launchBrowser() {
-        //browser = HTMLUNIT;
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
