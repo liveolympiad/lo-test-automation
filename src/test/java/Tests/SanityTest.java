@@ -24,7 +24,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
@@ -61,11 +61,11 @@ public class SanityTest extends BaseTest {
                 "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
         elem.click();
         Thread.sleep(5000);
-        /*elem = utils.waitForElement(
-                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[3]/div[3]/button");
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
         elem.click();
         Thread.sleep(7000);
-        utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
+        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
     }
 
     /*@Test (priority = 1)
