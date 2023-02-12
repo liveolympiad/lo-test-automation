@@ -14,7 +14,7 @@ public class BaseTest {
     protected Utils utils;
 
     BaseTest() {
-        if (System.getProperty("os.name").equals("windows")) {
+        if (System.getProperty("os.name").equalsIgnoreCase("win")) {
             driverPath = "src\\test\\resources\\chromedriver.exe";
         }
     }
