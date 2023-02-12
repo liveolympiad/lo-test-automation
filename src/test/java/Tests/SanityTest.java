@@ -108,7 +108,7 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
-    public void loginPasswordEntered() throws InterruptedException {
+    public void loginInvalidPasswordEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123");
