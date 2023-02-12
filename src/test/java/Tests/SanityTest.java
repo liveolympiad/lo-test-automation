@@ -30,8 +30,10 @@ public class SanityTest extends BaseTest {
             System.setProperty("webdriver.chrome.driver", driverPath);
             driver = new ChromeDriver(options);
         }
-        driver.get(baseUrl);
+        //driver.get(baseUrl);
+        driver.navigate().to(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().deleteAllCookies();
         utils = new Utils(driver);
     }
 
@@ -43,14 +45,99 @@ public class SanityTest extends BaseTest {
     }
 
     @Test(priority = 0)
-    public void loginNoPhoneNumberEntered(){
-        driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+    public void loginNoPhoneNumberEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "");
+        LoginPage.enterPassword(driver, "123456");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
         String expected = "Please enter valid phone number";
-        WebElement elem = driver.findElement(By.xpath(""));
+        //WebElement elem = driver.findElement(By.xpath(""));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
 
+    public void loginIncorrectPasswordEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "9958895489");
+        LoginPage.enterPassword(driver, "123455");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        String expected = "Incorrect password";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        Assert.assertEquals(actual, expected, "Error: Incorrect password");
+    }
+
+    public void loginUnregisteredNumberEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "9958895499");
+        LoginPage.enterPassword(driver, "123456");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        //String expected = "Please enter valid phone number";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        //Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
+    }
+
+    public void loginEmptyDataEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "");
+        LoginPage.enterPassword(driver, "");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        String expected = "Please enter valid phone number";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
+    }
+    public void loginPasswordEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "9958895489");
+        LoginPage.enterPassword(driver, "123");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        String expected = "Please enter valid 6 digit password";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
+    }
+    public void loginNoPasswordEntered() throws InterruptedException {
+        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
+        LoginPage.enterLogin(driver, "9958895489");
+        LoginPage.enterPassword(driver, "");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        WebElement elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        String expected = "Please enter valid 6 digit password";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+        Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
+    }
     @Test(priority = 0)
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");

@@ -9,7 +9,7 @@ public class BaseTest {
 
     //private final String baseUrl = "https://app-uat.liveolympiad.org/";
     protected final String baseUrl = "https://app.liveolympiad.org/";
-    protected final String driverPath = "src/test/resources/chromedriver";
+    protected final String driverPath = "src\\test\\resources\\chromedriver.exe";
     protected WebDriver driver;
 
     protected Utils utils;
