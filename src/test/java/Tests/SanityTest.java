@@ -30,8 +30,9 @@ public class SanityTest extends BaseTest {
             System.setProperty("webdriver.chrome.driver", driverPath);
             driver = new ChromeDriver(options);
         }
-        driver.get(baseUrl);
+        driver.navigate().to(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().deleteAllCookies();
         utils = new Utils(driver);
     }
 
