@@ -24,7 +24,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
