@@ -1,5 +1,6 @@
 package Tests;
 
+import PageObjectModel.ProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -24,7 +25,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
@@ -37,11 +38,13 @@ public class SanityTest extends BaseTest {
         utils = new Utils(driver);
     }
 
+    //Verify Login Screen (Phone number textbox, Password Textbox & Login button)
     @BeforeMethod
     public void verifyHomepageTitle() {
         String expectedTitle = "LiveOlympiad";
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
+        LoginPage.verifyPageDetails(driver);
     }
 
     @Test(priority = 0)
@@ -52,7 +55,8 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
+
         elem.click();
         Thread.sleep(5000);
         String expected = "Please enter valid phone number";
@@ -123,6 +127,8 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
     }
+
+
     public void loginNoPasswordEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
@@ -139,22 +145,73 @@ public class SanityTest extends BaseTest {
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
     }
     @Test(priority = 0)
+//    public void login() throws InterruptedException {
+//        LoginPage.enterLogin(driver, "9958895489");
+//        LoginPage.enterPassword(driver, "123456");
+//        LoginPage.clickLogin(driver);
+//        Thread.sleep(2000);
+//        WebElement elem = utils.waitForElement(
+//                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+//        elem.click();
+//        Thread.sleep(5000);
+//        elem = utils.waitForElement(
+//                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
+//        elem.click();
+//        Thread.sleep(7000);
+//        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
+//
+//    }
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
+        elem.click();
+        Thread.sleep(2000);
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[3]/span[1]");
+        elem.click();
+        Thread.sleep(2000);
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[4]/span[1]");
+        elem.click();
+        Thread.sleep(2000);
+        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[2]/div/div/div/div/button[2]/div/div/div");
+        elem.click();
+        Thread.sleep(2000);
+
+        //verify button is enabled or not
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[3]/div/div[2]/div/div[9]/button");
         elem.click();
         Thread.sleep(5000);
-        elem = utils.waitForElement(
-                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
-        elem.click();
-        Thread.sleep(7000);
-        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
+        String expected = "Profile submitted successfully";
+        //WebElement elem = driver.findElement(By.xpath(""));
+        String actual = elem.getText();
+
+        //verify textbox fields in profile
+        ProfilePage.enterFullname(driver, "John");
+        Thread.sleep(2000);
+        ProfilePage.enterRollno(driver, "12");
+        Thread.sleep(2000);
+//        EnterProfileDetails.enterSection(driver, "D");   //help
+//        Thread.sleep(2000);
+        ProfilePage.enterEmail(driver, "D@gmail.com");
+        Thread.sleep(2000);
+
     }
 
+    @Test(priority = 0)
+    public void verifyElements() throws InterruptedException
+    {
+        boolean phoneNo = driver.findElement(By.xpath("//*[@id=\":r0:\"]")).isDisplayed();
+        Thread.sleep(2000);
+
+    }
     /*@Test (priority = 1)
     public void support() {
         driver.findElement(By.linkText("SUPPORT")).click() ;

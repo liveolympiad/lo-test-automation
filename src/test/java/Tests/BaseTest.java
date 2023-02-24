@@ -13,8 +13,11 @@ public class BaseTest {
     protected Utils utils;
 
     BaseTest() {
-        if (System.getProperty("os.name").equalsIgnoreCase("win")) {
+        String os = System.getProperty("os.name");
+        if (os.equalsIgnoreCase("Windows 10")) {
             driverPath = "src\\test\\resources\\chromedriver.exe";
+        } else if (os.equalsIgnoreCase("Linux")) {
+            driverPath = "src/test/resources/linux/chromedriver";
         }
     }
 }

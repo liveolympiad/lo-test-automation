@@ -2,6 +2,8 @@ package PageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class LoginPage extends AbstractPage {
 
@@ -24,5 +26,16 @@ public class LoginPage extends AbstractPage {
                 .click();
     }
 
+    public static void verifyPageDetails(WebDriver driver) {
+        WebElement elem = driver.findElement(By.xpath("//*[@id=\":r0:\"]"));
+        Assert.assertEquals(elem.isDisplayed(),true, "Error: phone number input box is not page is not enabled ");
+        Assert.assertEquals(elem.isEnabled(), true, "Error: phone number input box is not page is not enabled ");
+        elem = driver.findElement(By.xpath("//*[@id=\":r1:\"]"));
+        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
+        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+        elem = driver.findElement(By.xpath("//*[@id=\"clicked\"]"));
+        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
+        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+    }
 
 }

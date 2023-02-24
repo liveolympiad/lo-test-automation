@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class EnterProfileDetails extends AbstractPage
+public class ProfilePage extends AbstractPage
 {
     public static void enterFullname(WebDriver driver, String fullname)
     {
