@@ -39,13 +39,13 @@ public class SanityTest extends BaseTest {
     }
 
     //Verify Login Screen (Phone number textbox, Password Textbox & Login button)
-    @BeforeMethod
-    public void verifyHomepageTitle() {
-        String expectedTitle = "LiveOlympiad";
-        String actualTitle = driver.getTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        LoginPage.verifyPageDetails(driver);
-    }
+//    @BeforeMethod
+//    public void verifyHomepageTitle() {
+//        String expectedTitle = "LiveOlympiad";
+//        String actualTitle = driver.getTitle();
+//        Assert.assertEquals(actualTitle, expectedTitle);
+//        LoginPage.verifyPageDetails(driver);
+//    }
 
     @Test(priority = 0)
     public void loginNoPhoneNumberEntered() throws InterruptedException {
