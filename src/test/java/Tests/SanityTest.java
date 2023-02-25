@@ -28,8 +28,8 @@ public class SanityTest extends BaseTest {
             System.setProperty("webdriver.chrome.driver", driverPath);
             driver = new ChromeDriver(options);
         }
-        //driver.get(baseUrl); // TODO: Learn get() vs navigate().to()
-        driver.navigate().to(baseUrl);
+        driver.get(baseUrl); // TODO: Learn get() vs navigate().to()
+        //driver.navigate().to(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -44,10 +44,11 @@ public class SanityTest extends BaseTest {
     }
 
     @AfterMethod
-    public void logout() {
+    public void logout() throws InterruptedException {
         if (driver != null) {
-            driver.navigate().to("https://app.liveolympiad.org/dashboard");
-            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button"));
+            driver.get(baseUrl + "dashboard");
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
+            Thread.sleep(5000);
         }
     }
 
