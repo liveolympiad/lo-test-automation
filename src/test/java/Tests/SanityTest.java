@@ -2,10 +2,7 @@ package Tests;
 
 import PageObjectModel.ProfilePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -35,7 +32,23 @@ public class SanityTest extends BaseTest {
         driver.navigate().to(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
         utils = new Utils(driver);
+    }
+
+    @AfterTest
+    public void terminateBrowser(){
+        if (driver != null) {
+            driver.close();
+        }
+    }
+
+    @AfterMethod
+    public void logout() {
+        if (driver != null) {
+            driver.navigate().to("https://app.liveolympiad.org/dashboard");
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button"));
+        }
     }
 
     //Verify Login Screen (Phone number textbox, Password Textbox & Login button)
@@ -65,6 +78,7 @@ public class SanityTest extends BaseTest {
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
 
+    @Test(priority = 0)
     public void loginIncorrectPasswordEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
@@ -81,6 +95,7 @@ public class SanityTest extends BaseTest {
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
     }
 
+    @Test(priority = 0)
     public void loginUnregisteredNumberEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895499");
@@ -97,6 +112,7 @@ public class SanityTest extends BaseTest {
         //Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
 
+    @Test(priority = 0)
     public void loginEmptyDataEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "");
@@ -112,6 +128,8 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
+
+    @Test(priority = 0)
     public void loginInvalidPasswordEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
@@ -129,6 +147,7 @@ public class SanityTest extends BaseTest {
     }
 
 
+    @Test(priority = 0)
     public void loginNoPasswordEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
@@ -144,7 +163,7 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
     }
-    @Test(priority = 0)
+   // @Test(priority = 0)
 //    public void login() throws InterruptedException {
 //        LoginPage.enterLogin(driver, "9958895489");
 //        LoginPage.enterPassword(driver, "123456");
@@ -161,6 +180,8 @@ public class SanityTest extends BaseTest {
 //        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
 //
 //    }
+
+    @Test(priority = 0)
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
@@ -242,10 +263,5 @@ public class SanityTest extends BaseTest {
         driver.findElement(By.linkText("Home")).click() ;
     }*/
 
-    @AfterTest
-    public void terminateBrowser(){
-        if (driver != null) {
-            driver.close();
-        }
-    }
+
 }
