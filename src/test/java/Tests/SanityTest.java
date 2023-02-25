@@ -166,7 +166,11 @@ public class SanityTest extends BaseTest {
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
-        WebElement elem = utils.waitForElement(
+        WebElement elem = utils.waitForElement("//*[@id=\"root\"]/div/div[2]/div/div/div/div/button[1]/div/div/div");
+        elem.click();
+        Thread.sleep(2000);
+
+        elem = utils.waitForElement(
                 "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
         elem.click();
         Thread.sleep(2000);
@@ -202,6 +206,20 @@ public class SanityTest extends BaseTest {
 //        Thread.sleep(2000);
         ProfilePage.enterEmail(driver, "D@gmail.com");
         Thread.sleep(2000);
+
+        //going back to Practice page
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[2]/div/div/div/div/button[1]/div/div");
+        elem.click();
+        Thread.sleep(5000);
+        elem = utils.waitForElement(
+                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+        elem.click();
+        Thread.sleep(5000);
+        elem = utils.waitForElement(
+                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
+        elem.click();
+        Thread.sleep(7000);
 
     }
 
