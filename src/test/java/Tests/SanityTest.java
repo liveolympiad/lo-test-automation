@@ -25,7 +25,8 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("window-size=1920x1080");
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
             System.setProperty("webdriver.chrome.driver", driverPath);
@@ -58,9 +59,9 @@ public class SanityTest extends BaseTest {
                 "//*[@id=\"clicked\"]");
 
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Please enter valid phone number";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        elem = driver.findElement(By.className(".MuiAlert-icon.css-1l54tgj"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
