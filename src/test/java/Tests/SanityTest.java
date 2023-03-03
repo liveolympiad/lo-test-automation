@@ -67,14 +67,15 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
                 "//*[@id=\"clicked\"]");
 
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Please enter valid phone number";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        //WebElement
+        elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
@@ -85,13 +86,14 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123455");
         LoginPage.clickLogin(driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Incorrect password";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+        //WebElement elem = driver.findElement(By.xpath("//*[@id="simple-tabpanel-0"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
     }
@@ -104,7 +106,7 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
         elem.click();
         Thread.sleep(5000);
         //String expected = "Please enter valid phone number";
@@ -119,13 +121,13 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "");
         LoginPage.clickLogin(driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Please enter valid phone number";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
     }
@@ -136,13 +138,15 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123");
         LoginPage.clickLogin(driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
+//        WebElement elem = utils.waitForElement(
+//                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Please enter valid 6 digit password";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
     }
@@ -154,13 +158,13 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "");
         LoginPage.clickLogin(driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         WebElement elem = utils.waitForElement(
-                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
+                "//*[@id=\"clicked\"]");
         elem.click();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         String expected = "Please enter valid 6 digit password";
-        //WebElement elem = driver.findElement(By.xpath(""));
+        elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
     }
