@@ -10,10 +10,17 @@ public class LoginPage extends AbstractPage {
     public static void enterLogin(WebDriver driver, String phNum) {
         driver.findElement(By.xpath(
                         "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[3]/div/div/div/input"))
+                .clear();
+        driver.findElement(By.xpath(
+                        "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[3]/div/div/div/input"))
                 .sendKeys(phNum);
+
     }
 
     public static void enterPassword(WebDriver driver, String password) {
+        driver.findElement(By.xpath(
+                        "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[4]/div/div/div/input"))
+                .clear();
         driver.findElement(By.xpath(
                         "/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[4]/div/div/div/input"))
                 .sendKeys(password);
