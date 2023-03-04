@@ -22,7 +22,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
