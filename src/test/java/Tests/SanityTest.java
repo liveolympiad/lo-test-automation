@@ -22,7 +22,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless"); // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
@@ -44,14 +44,17 @@ public class SanityTest extends BaseTest {
         }
     }
 
-//    @AfterMethod
-//    public void logout() throws InterruptedException {
-//        if (driver != null) {
-//            driver.get(baseUrl + "dashboard");
-//            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
-//            Thread.sleep(5000);
-//        }
-//    }
+    @AfterMethod
+    public void logout() throws InterruptedException {
+        if (driver != null) {
+            driver.get(baseUrl + "dashboard");
+            String elemLoc = "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button";
+            if (driver.findElements(By.xpath(elemLoc)).size() != 0) {
+                driver.findElement(By.xpath(elemLoc)).click();
+                Thread.sleep(5000);
+            }
+        }
+    }
 
     //Verify Login Screen (Phone number textbox, Password Textbox & Login button)
 //    @BeforeMethod
@@ -80,7 +83,6 @@ public class SanityTest extends BaseTest {
         //elem = driver.findElement(By.className(".MuiAlert-icon.css-1l54tgj"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
-
     }
 
     @Test(priority = 0)
@@ -254,9 +256,9 @@ public class SanityTest extends BaseTest {
                 "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
         elem.click();
         Thread.sleep(7000);
-        driver.get(baseUrl + "dashboard");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
-        Thread.sleep(5000);
+//        driver.get(baseUrl + "dashboard");
+//        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
+//        Thread.sleep(5000);
 
     }
 

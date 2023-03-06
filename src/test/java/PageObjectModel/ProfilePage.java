@@ -8,6 +8,7 @@ public class ProfilePage extends AbstractPage
 {
     public static void enterFullname(WebDriver driver, String fullname)
     {
+
         driver.findElement(By.xpath(
                         "//*[@id=\":r0:\"]"))
                 .sendKeys(fullname);

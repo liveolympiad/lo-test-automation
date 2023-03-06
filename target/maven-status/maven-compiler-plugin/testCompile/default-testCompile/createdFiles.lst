@@ -1,8 +1,0 @@
-jni\DalJNI.class
-Utils\Utils.class
-PageObjectModel\StartTestPage.class
-Tests\BaseTest.class
-PageObjectModel\ProfilePage.class
-Tests\SanityTest.class
-PageObjectModel\AbstractPage.class
-PageObjectModel\LoginPage.class
