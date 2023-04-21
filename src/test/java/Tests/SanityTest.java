@@ -22,8 +22,9 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080"); // TODO: don't forget to uncomment while doing git push
+        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
+        options.addArguments("--remote-allow-origins=*");
 
         if (this.browser.equals(CHROME)) {
             System.out.println("launching chrome browser");
@@ -87,6 +88,7 @@ public class SanityTest extends BaseTest {
         //elem = driver.findElement(By.className(".MuiAlert-icon.css-1l54tgj"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
+
     }
 
     @Test(priority = 0)
@@ -265,6 +267,24 @@ public class SanityTest extends BaseTest {
 //        Thread.sleep(5000);
 
     }
+
+//    @Test(priority = 0)
+//    public void verifySignUpButton() throws InterruptedException {
+//
+//        WebElement signupbtn = driver.findElement(By.cssSelector("button#scrollable-auto-tab-1"));
+//        try {
+//
+//            System.out.println("PASS: ELEMENT IS PRESENT");
+//        }catch (Exception e){
+//            System.out.println("FAIL: ELEMENT NOT PRESENT");
+//        }
+//        Thread.sleep(2000);
+//
+//        signupbtn.getText();
+//        signupbtn.click();
+//
+//        driver.quit();
+//    }
 
     @Test(priority = 0)
     public void verifyElements() throws InterruptedException

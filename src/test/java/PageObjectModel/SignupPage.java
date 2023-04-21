@@ -14,7 +14,7 @@ public class SignupPage extends AbstractPage {
         elem.sendKeys(Keys.DELETE);
 
         //elem.clear();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         elem.sendKeys(phoneNo);
 
     }
