@@ -10,12 +10,7 @@ public class MobileVerification extends AbstractPage {
 public static void otpfields(WebDriver driver, String otp) throws InterruptedException {
     WebElement elem = driver.findElement(By.xpath(
             "//div[@class= 'MuiBox-root css-6tgr00'] //input[@type='tel']"));
-    elem.sendKeys(Keys.BACK_SPACE);
-    elem.sendKeys(Keys.BACK_SPACE);
-    elem.sendKeys(Keys.BACK_SPACE);
-    elem.sendKeys(Keys.BACK_SPACE);
-    elem.sendKeys(Keys.BACK_SPACE);
-    elem.sendKeys(Keys.BACK_SPACE);
+    elem.clear();
     elem.sendKeys(otp);
 }
     public static void clickVerify(WebDriver driver) {
