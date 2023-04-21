@@ -22,7 +22,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -61,14 +61,6 @@ public class SanityTest extends BaseTest {
         }
     }
 
-    //Verify Login Screen (Phone number textbox, Password Textbox & Login button)
-//    @BeforeMethod
-//    public void verifyHomepageTitle() {
-//        String expectedTitle = "LiveOlympiad";
-//        String actualTitle = driver.getTitle();
-//        Assert.assertEquals(actualTitle, expectedTitle);
-//        LoginPage.verifyPageDetails(driver);
-//    }
 
     @Test(priority = 0)
     public void loginNoPhoneNumberEntered() throws InterruptedException {
@@ -104,7 +96,6 @@ public class SanityTest extends BaseTest {
         //Thread.sleep(5000);
         String expected = "Incorrect password";
         WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        //WebElement elem = driver.findElement(By.xpath("//*[@id="simple-tabpanel-0"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
 
@@ -113,18 +104,15 @@ public class SanityTest extends BaseTest {
     @Test(priority = 0)
     public void loginUnregisteredNumberEntered() throws InterruptedException {
         //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
-        LoginPage.enterLogin(driver, "9958895499");
+        LoginPage.enterLogin(driver, "9953895499");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id=\"clicked\"]");
-//        elem.click();
-        //Thread.sleep(5000);
-        //String expected = "Please enter valid phone number";
-        //WebElement elem = driver.findElement(By.xpath(""));
-        //String actual = elem.getText();
-        //Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
+        String expected = "Sign Up";
+        WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-10ay245\"]"));
+        String actual = titleheading.getText();
+        Assert.assertEquals(actual, expected);
+        System.out.println(titleheading);
     }
 
     @Test(priority = 0)
@@ -151,15 +139,8 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123");
         LoginPage.clickLogin(driver);
-        //Thread.sleep(2000);
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id=\"clicked\"]");
-//        elem.click();
-        //Thread.sleep(5000);
         String expected = "Please enter valid 6 digit password";
-       WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
 
@@ -168,15 +149,10 @@ public class SanityTest extends BaseTest {
 
     @Test(priority = 0)
     public void loginNoPasswordEntered() throws InterruptedException {
-        //driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div/div/div[1]/div/div/div/div[6]/button")).click();
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "");
         LoginPage.clickLogin(driver);
-        //Thread.sleep(2000);
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id=\"clicked\"]");
-//        elem.click();
-        //Thread.sleep(5000);
+
         String expected = "Please enter valid 6 digit password";
         WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
         String actual = elem.getText();
@@ -262,29 +238,9 @@ public class SanityTest extends BaseTest {
                 "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
         elem.click();
         Thread.sleep(7000);
-//        driver.get(baseUrl + "dashboard");
-//        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
-//        Thread.sleep(5000);
 
     }
 
-//    @Test(priority = 0)
-//    public void verifySignUpButton() throws InterruptedException {
-//
-//        WebElement signupbtn = driver.findElement(By.cssSelector("button#scrollable-auto-tab-1"));
-//        try {
-//
-//            System.out.println("PASS: ELEMENT IS PRESENT");
-//        }catch (Exception e){
-//            System.out.println("FAIL: ELEMENT NOT PRESENT");
-//        }
-//        Thread.sleep(2000);
-//
-//        signupbtn.getText();
-//        signupbtn.click();
-//
-//        driver.quit();
-//    }
 
     @Test(priority = 0)
     public void verifyElements() throws InterruptedException

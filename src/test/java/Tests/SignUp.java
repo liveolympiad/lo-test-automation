@@ -26,7 +26,7 @@ public class SignUp extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -97,6 +97,7 @@ public class SignUp extends BaseTest {
     public void verifySignUpRegisteredNo() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"9958895489");
+        Thread.sleep(3000);
         SignupPage.clickSignup(driver);
         String expected = "A user already exists with given email or phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
@@ -111,7 +112,7 @@ public class SignUp extends BaseTest {
     public void verifySignUpInvalidNumber() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"111");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         SignupPage.clickSignup(driver);
         String expected = "Please enter valid phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class= 'MuiAlert-message css-1xsto0d']"));
@@ -219,7 +220,7 @@ public class SignUp extends BaseTest {
         //System.out.println("Create New Password : " + driver.getCurrentUrl());
     }
 
-    @Test(priority = 11) //OTP INSERTED MANUALLLY FOR NOW
+    @Test(priority = 11) //OTP INSERTED MANUALLY FOR NOW
     public void verifyCorrectOTP() throws InterruptedException {
         Thread.sleep(3000);
         MobileVerification.clickVerify(driver);
