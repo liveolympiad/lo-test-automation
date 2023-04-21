@@ -26,7 +26,7 @@ public class SignUp extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -217,5 +217,19 @@ public class SignUp extends BaseTest {
         MobileVerification.clickVerify(driver);
 
         //System.out.println("Create New Password : " + driver.getCurrentUrl());
+    }
+
+    @Test(priority = 11) //OTP INSERTED MANUALLLY FOR NOW
+    public void verifyCorrectOTP() throws InterruptedException {
+        Thread.sleep(3000);
+        MobileVerification.clickVerify(driver);
+        System.out.println("Create New Password : " + driver.getCurrentUrl());
+    }
+
+    @Test(priority = 12)
+    public void verifyCreateNewPassword() throws InterruptedException {
+        Thread.sleep(3000);
+        MobileVerification.clickVerify(driver);
+        System.out.println("Create New Password : " + driver.getCurrentUrl());
     }
 }
