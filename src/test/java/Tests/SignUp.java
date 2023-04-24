@@ -97,12 +97,15 @@ public class SignUp extends BaseTest {
     public void verifySignUpRegisteredNo() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"9958895489");
-        Thread.sleep(3000);
         SignupPage.clickSignup(driver);
+        Thread.sleep(1000);
+
+
         String expected = "A user already exists with given email or phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: A user already exists with given email or phone number");
+        MobileVerification.clickClose(driver);
         Thread.sleep(2000);
 
     }
@@ -112,13 +115,15 @@ public class SignUp extends BaseTest {
     public void verifySignUpInvalidNumber() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"111");
-        Thread.sleep(3000);
         SignupPage.clickSignup(driver);
+        Thread.sleep(1000);
+
         String expected = "Please enter valid phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class= 'MuiAlert-message css-1xsto0d']"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
 
+        MobileVerification.clickClose(driver);
     }
 
     @Test(priority = 4)
@@ -126,27 +131,33 @@ public class SignUp extends BaseTest {
     public void verifySignUpCharPhoneNo() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"8787eeeeee");
-        Thread.sleep(2000);
         SignupPage.clickSignup(driver);
+        Thread.sleep(1000);
+
+
         String expected = "Please enter valid phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class= 'MuiAlert-message css-1xsto0d']"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
 
+        MobileVerification.clickClose(driver);
     }
 
     @Test(priority = 2)
     public void verifyEmptyNumber() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"");
-        Thread.sleep(2000);
         SignupPage.clickSignup(driver);
+        Thread.sleep(1000);
+
+
 
         String expected = "Please enter valid phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class= 'MuiAlert-message css-1xsto0d']"));
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
 
+        MobileVerification.clickClose(driver);
     }
 
     @Test(priority = 6)
