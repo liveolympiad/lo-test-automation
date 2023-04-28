@@ -9,11 +9,11 @@ import org.testng.Assert;
 public class MobileVerification extends AbstractPage {
     public static void otpfields(WebDriver driver, String otp) throws InterruptedException {
 
-        for (int i = 1; i < 7; i++) {
+        for (int i = 6; i >=1 ; i--) {
             WebElement elem = driver.findElement(By.xpath(
                     "//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[3]/div/div/div[" + Integer.toString(i) + "]/input"));
             if (elem != null) {
-                elem.clear();
+                elem.sendKeys(Keys.BACK_SPACE);
             }
         }
 
@@ -23,6 +23,9 @@ public class MobileVerification extends AbstractPage {
     }
     public static void clickVerify(WebDriver driver) {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[4]/div/button")).click();
+    }
+    public static void clickResend(WebDriver driver){
+         driver.findElement(By.linkText("Resend")).click();
     }
     public static void clickClose(WebDriver driver){
         driver.findElement(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeSmall css-p4uye0']")).click();

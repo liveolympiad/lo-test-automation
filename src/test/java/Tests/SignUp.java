@@ -233,9 +233,11 @@ public class SignUp extends BaseTest {
 
     @Test(priority = 11) //OTP INSERTED MANUALLY FOR NOW
     public void verifyCorrectOTP() throws InterruptedException {
-        Thread.sleep(3000);
+        MobileVerification.clickResend(driver);
+        Thread.sleep(10000);
         MobileVerification.clickVerify(driver);
         System.out.println("Create New Password : " + driver.getCurrentUrl());
+
     }
 
     @Test(priority = 12)
