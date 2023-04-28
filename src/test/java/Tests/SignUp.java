@@ -1,7 +1,5 @@
 package Tests;
-import PageObjectModel.MobileVerification;
-import PageObjectModel.ProfilePage;
-import PageObjectModel.SignupPage;
+import PageObjectModel.*;
 import com.beust.ah.A;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
@@ -16,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
 
-import PageObjectModel.LoginPage;
 import Utils.Utils;
 import org.testng.asserts.SoftAssert;
 
@@ -241,9 +238,114 @@ public class SignUp extends BaseTest {
     }
 
     @Test(priority = 12)
-    public void verifyCreateNewPassword() throws InterruptedException {
-        Thread.sleep(3000);
-        MobileVerification.clickVerify(driver);
-        System.out.println("Create New Password : " + driver.getCurrentUrl());
+    public void verifyCreateNewPwPage() throws InterruptedException {
+        String expectedtitle = "Create New Password";
+        WebElement titleheading = driver.findElement(By.xpath
+                ("//div[@class='MuiBox-root css-1m4el6g']"));
+        String actualtitle = titleheading.getText();
+        Assert.assertEquals(actualtitle, expectedtitle);
+
+        WebElement confirmPass = driver.findElement(By.xpath("//button[@id='clicked']"));
+        String expectedName = "Confirm Password";
+        String actualName = confirmPass.getText();
+        Assert.assertEquals(actualName, expectedName);
+        Assert.assertTrue(confirmPass.isEnabled(), "Verify button is enabled");
+
+        WebElement viewPass = driver.findElement(By.xpath("//button[@aria-label='toggle password visibility']"));
+        Assert.assertTrue(confirmPass.isDisplayed(), "View Password button is displayed");
+        Assert.assertTrue(confirmPass.isEnabled(), "View Password is enabled");
+
+    }
+
+    @Test(priority = 13)
+    public void verifyEmptyPassword() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "");
+        CreateNewPasswordPage.enterConfirmpass(driver, "");
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
+    }
+
+    @Test(priority = 14)
+    public void verifyWrongConfirm() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123456");
+        CreateNewPasswordPage.enterConfirmpass(driver, "");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Passwords do not match";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 15)
+    public void verifyCharPass() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123aaa");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123aaa");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 16)
+    public void verify6DigitPassValidation() throws InterruptedException {
+
+        WebElement newP = driver.findElement(By.xpath("//input[@id=':r0:']"));
+        String maxlength = newP.getAttribute("maxlength");
+        System.out.println("Password maximum length is: " + maxlength);
+
+        WebElement confirmP = driver.findElement(By.xpath("//input[@id=':r1:']"));
+        String maxlength1 = confirmP.getAttribute("maxlength");
+        System.out.println("Password maximum length is: " + maxlength1);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 17)
+    public void verifyInvalidPass() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+//        WebElement validation = driver.findElement(By.xpath("//div[@class='MuiBox-root css-0']"));
+//        String expectedvalidation = "Password must be of 6 characters and combination of numbers only";
+//        String actualvalidation = validation.getText();
+//        Assert.assertEquals(actualvalidation, expectedvalidation);
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 18)
+    public void enterPassword() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123456");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123456");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+        Thread.sleep(2000);
+
+//        String expectedUrl = "https://app.liveolympiad.org/dashboard";
+//        String actualUrl = driver.getCurrentUrl();
+//        Assert.assertEquals(actualUrl, expectedUrl);
+
     }
 }

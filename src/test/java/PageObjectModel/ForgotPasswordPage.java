@@ -19,6 +19,9 @@ public class ForgotPasswordPage extends AbstractPage {
 
 
     }
+    public static void clickClosePopup(WebDriver driver){
+        driver.findElement(By.xpath("//button[@aria-label='Close']")).click();
+    }
     public static void clickNext(WebDriver driver){
         driver.findElement(By.xpath("//button[@id=\"clicked\"]")).click();
     }

@@ -1,5 +1,6 @@
 package Tests;
 
+import PageObjectModel.CreateNewPasswordPage;
 import PageObjectModel.ForgotPasswordPage;
 import PageObjectModel.MobileVerification;
 import Utils.Utils;
@@ -21,7 +22,7 @@ public class ForgotPassword extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -82,19 +83,22 @@ public class ForgotPassword extends BaseTest {
         String actual = text.getText();
         Assert.assertEquals(actual, expected);
 
+        ForgotPasswordPage.clickClosePopup(driver);
+
     }
 
     @Test(priority = 3)
     public void forgotpwUnregisteredNo() throws InterruptedException {
 
-        ForgotPasswordPage.forgotPasswordFields(driver, "8729933699");
+        ForgotPasswordPage.forgotPasswordFields(driver, "8014114915");
         ForgotPasswordPage.clickNext(driver);
 
         String expected = "No User exists with given email or phone number";
-        WebElement text = driver.findElement(By.xpath("//div[@class=\"MuiAlert-message css-1xsto0d\"]"));
+        WebElement text = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
         String actual = text.getText();
         Assert.assertEquals(actual, expected);
 
+        ForgotPasswordPage.clickClosePopup(driver);
     }
 
     @Test(priority = 4)
@@ -108,6 +112,7 @@ public class ForgotPassword extends BaseTest {
         String actual = text.getText();
         Assert.assertEquals(actual, expected);
 
+        ForgotPasswordPage.clickClosePopup(driver);
     }
 
     @Test(priority = 5)
@@ -216,6 +221,95 @@ public class ForgotPassword extends BaseTest {
     }
 
     @Test(priority = 11)
-    public void verifyEmptyPassword2() throws InterruptedException {
+    public void verifyEmptyPassword() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "");
+        CreateNewPasswordPage.enterConfirmpass(driver, "");
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
     }
+
+    @Test(priority = 12)
+    public void verifyWrongConfirm() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123456");
+        CreateNewPasswordPage.enterConfirmpass(driver, "");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Passwords do not match";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 13)
+    public void verifyCharPass() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123aaa");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123aaa");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 14)
+    public void verify6DigitPassValidation() throws InterruptedException {
+
+        WebElement newP = driver.findElement(By.xpath("//input[@id=':r0:']"));
+        String maxlength = newP.getAttribute("maxlength");
+        System.out.println("Password maximum length is: " + maxlength);
+
+        WebElement confirmP = driver.findElement(By.xpath("//input[@id=':r1:']"));
+        String maxlength1 = confirmP.getAttribute("maxlength");
+        System.out.println("Password maximum length is: " + maxlength1);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 15)
+    public void verifyInvalidPass() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+
+        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String expected = "Please enter valid 6 digit password";
+        String actual = error.getText();
+        Assert.assertEquals(actual, expected);
+//        WebElement validation = driver.findElement(By.xpath("//div[@class='MuiBox-root css-0']"));
+//        String expectedvalidation = "Password must be of 6 characters and combination of numbers only";
+//        String actualvalidation = validation.getText();
+//        Assert.assertEquals(actualvalidation, expectedvalidation);
+        CreateNewPasswordPage.clickClosePopup(driver);
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 16)
+    public void enterPassword() throws InterruptedException {
+        CreateNewPasswordPage.enterNewpass(driver, "123456");
+        CreateNewPasswordPage.enterConfirmpass(driver, "123456");
+        CreateNewPasswordPage.viewPassword(driver);
+        CreateNewPasswordPage.clickConfirm(driver);
+        Thread.sleep(2000);
+
+        String expectedUrl = "https://app.liveolympiad.org/dashboard";
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualUrl, expectedUrl);
+
+    }
+
 }
