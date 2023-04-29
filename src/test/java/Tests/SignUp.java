@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
@@ -23,7 +24,7 @@ public class SignUp extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -190,7 +191,7 @@ public class SignUp extends BaseTest {
             System.out.println("FAIL: RESEND BUTTON IS NOT PRESENT");
         }
     }
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void verifyIncorrectOTP() throws InterruptedException {
 
         MobileVerification.otpfields(driver, "123456");
@@ -200,10 +201,12 @@ public class SignUp extends BaseTest {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
         String actualtext = elem.getText();
         Assert.assertEquals(actualtext, expectedtext);
+
+        MobileVerification.clickClose(driver);
         Thread.sleep(2000);
     }
 
-    @Test(priority = 9)
+    @Test(priority = 8)
     public void verifyEmptyOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "");
         MobileVerification.clickVerify(driver);
@@ -211,6 +214,8 @@ public class SignUp extends BaseTest {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
         String actualtext = elem.getText();
         Assert.assertEquals(actualtext, expectedtext);
+
+        MobileVerification.clickClose(driver);
         Thread.sleep(1000);
     }
 
@@ -222,15 +227,16 @@ public class SignUp extends BaseTest {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
         String actualtext = elem.getText();
         Assert.assertEquals(actualtext, expectedtext);
-        Thread.sleep(5000);
-        MobileVerification.clickVerify(driver);
+
+        MobileVerification.clickClose(driver);
+        Thread.sleep(1000);
 
         //System.out.println("Create New Password : " + driver.getCurrentUrl());
     }
 
     @Test(priority = 11) //OTP INSERTED MANUALLY FOR NOW
     public void verifyCorrectOTP() throws InterruptedException {
-        MobileVerification.clickResend(driver);
+        //MobileVerification.clickResend(driver);
         Thread.sleep(10000);
         MobileVerification.clickVerify(driver);
         System.out.println("Create New Password : " + driver.getCurrentUrl());
@@ -343,9 +349,64 @@ public class SignUp extends BaseTest {
         CreateNewPasswordPage.clickConfirm(driver);
         Thread.sleep(2000);
 
-//        String expectedUrl = "https://app.liveolympiad.org/dashboard";
+//        String expectedUrl = "https://app.liveolympiad.org/schooldetails";
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl);
-
     }
+    @Test(priority = 19)
+    public void verifySchoolDetailsPage() throws InterruptedException {
+        String expectedtitle = "School Details";
+        WebElement title = driver.findElement(By.xpath("//div[@class='MuiBox-root css-axccz7']"));
+        String actualtitle = title.getText();
+        Assert.assertEquals(actualtitle, expectedtitle);
+
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//
+//        driver.getWindowHandles();
+//
+//        WebElement schoolDropdown = driver.findElement(By.cssSelector(
+//                "[fdprocessedid = \"ywmvba\"]"));
+//        try {
+//
+//            System.out.println("PASS: ELEMENT IS PRESENT");
+//            Assert.assertTrue(schoolDropdown.isEnabled(), "schoolDropdown is enabled");
+//
+//        } catch (Exception e) {
+//            System.out.println("FAIL: ELEMENT NOT PRESENT");
+//        }
+//
+//        WebElement classDropdown = driver.findElement(By.cssSelector(
+//                "[fdprocessedid = \"gudfjc\"]"));
+//        try {
+//
+//            System.out.println("PASS: ELEMENT IS PRESENT");
+//            Assert.assertTrue(classDropdown.isEnabled(), "classDropdown is enabled");
+//
+//        } catch (Exception e) {
+//            System.out.println("FAIL: ELEMENT NOT PRESENT");
+//        }
+//
+//        WebElement sectionField = driver.findElement(By.xpath("//input[@id=':r2:']"));
+//        try {
+//
+//            System.out.println("PASS: ELEMENT IS PRESENT");
+//            Assert.assertTrue(sectionField.isEnabled(), "sectionField is enabled");
+//
+//        } catch (Exception e) {
+//            System.out.println("FAIL: ELEMENT NOT PRESENT");
+//        }
+//
+//        WebElement nextBtn = driver.findElement(By.xpath("//button[@fdprocessedid='49e5zi']"));
+//        try {
+//
+//            System.out.println("PASS: ELEMENT IS PRESENT");
+//            Assert.assertTrue(nextBtn.isEnabled(), "Next Button is enabled");
+//
+//        } catch (Exception e) {
+//            System.out.println("FAIL: ELEMENT NOT PRESENT");
+//        }
+//
+//
+    }
+
 }

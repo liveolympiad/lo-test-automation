@@ -24,10 +24,16 @@ public class ProfilePage extends AbstractPage
     {
         driver.findElement(By.xpath(
                         "//*[@id=\"root\"]/div/div[3]/div/div[2]/div/div[4]/div[2]/div/div"))
+                .clear();
+        driver.findElement(By.xpath(
+                        "//*[@id=\"root\"]/div/div[3]/div/div[2]/div/div[4]/div[2]/div/div"))
                 .sendKeys(section);
     }
     public static void enterEmail(WebDriver driver, String email)
     {
+        driver.findElement(By.xpath(
+                        "//*[@id=\":r4:\"]"))
+                .clear();
         driver.findElement(By.xpath(
                         "//*[@id=\":r4:\"]"))
                 .sendKeys(email);

@@ -33,6 +33,9 @@ public class LoginPage extends AbstractPage {
                 .click();
     }
 
+    public static void clickClose(WebDriver driver){
+        driver.findElement(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeSmall css-p4uye0']")).click();
+    }
     public static void verifyPageDetails(WebDriver driver) {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\":r0:\"]"));
         Assert.assertEquals(elem.isDisplayed(),true, "Error: phone number input box is not page is not enabled ");
