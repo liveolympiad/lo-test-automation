@@ -171,7 +171,7 @@ public class SanityTest extends BaseTest {
 
     @Test(priority = 7)
     public void login() throws InterruptedException {
-            LoginPage.enterLogin(driver, "9958895489");
+        LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
