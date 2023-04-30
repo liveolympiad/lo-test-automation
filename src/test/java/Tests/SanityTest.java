@@ -84,7 +84,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void loginIncorrectPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123455");
@@ -98,7 +98,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 3)
+    @Test(priority = 1)
     public void loginUnregisteredNumberEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9953895499");
         LoginPage.enterPassword(driver, "123456");
@@ -111,7 +111,7 @@ public class SanityTest extends BaseTest {
         System.out.println(titleheading);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 1)
     public void loginEmptyDataEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "");
@@ -125,7 +125,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 1)
     public void loginInvalidPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123");
@@ -138,7 +138,7 @@ public class SanityTest extends BaseTest {
         LoginPage.clickClose(driver);
 
     }
-    @Test(priority = 6)
+    @Test(priority = 1)
     public void loginNoPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "");
@@ -169,7 +169,7 @@ public class SanityTest extends BaseTest {
 //
 //    }
 
-    @Test(priority = 7)
+    @Test(priority = 1)
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
