@@ -118,16 +118,16 @@ public class ForgotPassword extends BaseTest {
     @Test(priority = 5)
     public void forgotpw() throws InterruptedException {
 
-        ForgotPasswordPage.forgotPasswordFields(driver, "8794648306");
+        ForgotPasswordPage.forgotPasswordFields(driver, "8787554083");
         ForgotPasswordPage.clickNext(driver);
-
-        System.out.println("Mobile Verification: " + driver.getCurrentUrl());
-        Thread.sleep(2000);
 
         String expected = "Mobile Verification";
         WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-1cs5gre\"]"));
         String actual = titleheading.getText();
         Assert.assertEquals(actual, expected);
+
+        System.out.println("Mobile Verification: " + driver.getCurrentUrl());
+        Thread.sleep(2000);
 
         WebElement verifybtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[4]/div/button"));
         Assert.assertTrue(verifybtn.isEnabled(), "Verify button is enabled");
