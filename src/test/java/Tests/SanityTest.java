@@ -1,25 +1,22 @@
 package Tests;
 
 import PageObjectModel.DashboardPracticePage;
-import PageObjectModel.ForgotPasswordPage;
+import PageObjectModel.LoginPage;
 import PageObjectModel.ProfilePage;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import org.testng.annotations.*;
-
+import Utils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
-
-import PageObjectModel.LoginPage;
-import Utils.Utils;
 
 @Test
 public class SanityTest extends BaseTest {
