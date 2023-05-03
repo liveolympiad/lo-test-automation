@@ -39,14 +39,14 @@ public class LoginPage extends AbstractPage {
 
     public static void verifyPageDetails(WebDriver driver) {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\":r0:\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: phone number input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: phone number input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: phone number input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: phone number input box is not page is not enabled ");
         elem = driver.findElement(By.xpath("//*[@id=\":r1:\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: password input box is not page is not enabled ");
         elem = driver.findElement(By.xpath("//*[@id=\"clicked\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: password input box is not page is not enabled ");
     }
 
     public static String logoutButton() {
