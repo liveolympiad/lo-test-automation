@@ -51,7 +51,7 @@ public class SanityTest extends BaseTest {
     public void logout() throws InterruptedException {
         if (driver != null) {
             driver.get(baseUrl + "dashboard");
-            String elemLoc = "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button";
+            String elemLoc = LoginPage.logoutButton();
             if (driver.findElements(By.xpath(elemLoc)).size() != 0) {
                 driver.findElement(By.xpath(elemLoc)).click();
                 Thread.sleep(2000);
