@@ -34,7 +34,6 @@ public class SanityTest extends BaseTest {
             driver = new ChromeDriver(options);
         }
         driver.get(baseUrl); // TODO: Learn get() vs navigate().to()
-        //driver.navigate().to(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -62,7 +61,8 @@ public class SanityTest extends BaseTest {
             }
         }
     }
-    @Test(priority = 1)
+
+    @Test
     public void loginNoPhoneNumberEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "123455");
@@ -81,7 +81,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void loginIncorrectPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123455");
@@ -95,7 +95,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void loginUnregisteredNumberEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9953895499");
         LoginPage.enterPassword(driver, "123456");
@@ -108,7 +108,7 @@ public class SanityTest extends BaseTest {
         System.out.println(titleheading);
     }
 
-    @Test(priority = 1)
+    @Test
     public void loginEmptyDataEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "");
@@ -122,7 +122,7 @@ public class SanityTest extends BaseTest {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void loginInvalidPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123");
@@ -135,7 +135,8 @@ public class SanityTest extends BaseTest {
         LoginPage.clickClose(driver);
 
     }
-    @Test(priority = 1)
+
+    @Test
     public void loginNoPasswordEntered() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "");
@@ -148,25 +149,8 @@ public class SanityTest extends BaseTest {
         LoginPage.clickClose(driver);
 
     }
-   // @Test(priority = 0)
-//    public void login() throws InterruptedException {
-//        LoginPage.enterLogin(driver, "9958895489");
-//        LoginPage.enterPassword(driver, "123456");
-//        LoginPage.clickLogin(driver);
-//        Thread.sleep(2000);
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id='root']/div/div[3]/div/div[1]/div[2]/div[2]/div[2]/button");
-//        elem.click();
-//        Thread.sleep(5000);
-//        elem = utils.waitForElement(
-//                "//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]/div[3]/button");
-//        elem.click();
-//        Thread.sleep(7000);
-//        /*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
-//
-//    }
 
-    @Test(priority = 1)
+    @Test
     public void login() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
@@ -278,6 +262,4 @@ public class SanityTest extends BaseTest {
     public void goBackToHomepage ( ) {
         driver.findElement(By.linkText("Home")).click() ;
     }*/
-
-
 }

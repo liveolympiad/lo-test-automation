@@ -20,7 +20,6 @@ public class SignupPage extends AbstractPage {
     }
 
     public static void clickSignup(WebDriver driver){
-
         driver.findElement(By.xpath("//button[@id='clicked']")).click();
     }
 }
