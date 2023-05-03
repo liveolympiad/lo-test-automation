@@ -36,16 +36,21 @@ public class LoginPage extends AbstractPage {
     public static void clickClose(WebDriver driver){
         driver.findElement(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeSmall css-p4uye0']")).click();
     }
+
     public static void verifyPageDetails(WebDriver driver) {
         WebElement elem = driver.findElement(By.xpath("//*[@id=\":r0:\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: phone number input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: phone number input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: phone number input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: phone number input box is not page is not enabled ");
         elem = driver.findElement(By.xpath("//*[@id=\":r1:\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: password input box is not page is not enabled ");
         elem = driver.findElement(By.xpath("//*[@id=\"clicked\"]"));
-        Assert.assertEquals(elem.isDisplayed(),true, "Error: password input box is not page is not enabled ");
-        Assert.assertEquals(elem.isEnabled(), true, "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isDisplayed(), "Error: password input box is not page is not enabled ");
+        Assert.assertTrue(elem.isEnabled(), "Error: password input box is not page is not enabled ");
+    }
+
+    public static String logoutButton() {
+        return "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button";
     }
 
 }
