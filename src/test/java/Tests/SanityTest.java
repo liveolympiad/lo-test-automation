@@ -78,7 +78,6 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
         LoginPage.clickClose(driver);
-
     }
 
     @Test
@@ -92,7 +91,6 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
         LoginPage.clickClose(driver);
-
     }
 
     @Test
@@ -119,7 +117,6 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
         LoginPage.clickClose(driver);
-
     }
 
     @Test
@@ -133,7 +130,6 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
-
     }
 
     @Test
@@ -147,7 +143,6 @@ public class SanityTest extends BaseTest {
         String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
-
     }
 
     @Test
@@ -242,7 +237,6 @@ public class SanityTest extends BaseTest {
         WebElement succMess = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
         String actualMessage = succMess.getText();
         Assert.assertEquals(actualMessage, expectedMessage);
-
     }
 //    @Test(priority = 0)
 //    public void verifyElements() throws InterruptedException
