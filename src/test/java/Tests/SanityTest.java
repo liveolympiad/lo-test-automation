@@ -24,7 +24,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -51,12 +51,12 @@ public class SanityTest extends BaseTest {
     public void logout() throws InterruptedException {
         if (driver != null) {
             driver.get(baseUrl + "dashboard");
-            String elemLoc = LoginPage.logoutButton();
-            if (driver.findElements(By.xpath(elemLoc)).size() != 0) {
-                driver.findElement(By.xpath(elemLoc)).click();
+            String logoutButtonLoc = LoginPage.logoutButton();
+            if (driver.findElements(By.xpath(logoutButtonLoc)).size() != 0) {
+                driver.findElement(By.xpath(logoutButtonLoc)).click();
                 Thread.sleep(2000);
                 //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//                WebElement elem = utils.waitForElement(elemLoc);
+//                WebElement elem = utils.waitForElement(logoutButtonLoc);
 //                elem.click();
             }
         }
@@ -74,8 +74,11 @@ public class SanityTest extends BaseTest {
 //        elem.click();
         //Thread.sleep(5000);
         String expected = "Please enter valid phone number";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        String actual = elem.getText();
+        String errorPopupLoc = LoginPage.errorPopup1();
+        String actual = driver.findElement(By.xpath(errorPopupLoc)).getText();
+
+        //WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+        //String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
         LoginPage.clickClose(driver);
     }
@@ -87,8 +90,10 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
 
         String expected = "Incorrect password";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        String actual = elem.getText();
+        String errorPopup2Loc = LoginPage.errorPopup2();
+        String actual = driver.findElement(By.xpath(errorPopup2Loc)).getText();
+        //WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+        //String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
         LoginPage.clickClose(driver);
     }
@@ -100,10 +105,12 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
         //Thread.sleep(2000);
         String expected = "Sign Up";
-        WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-10ay245\"]"));
-        String actual = titleheading.getText();
+        //WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-10ay245\"]"));
+        //String actual = titleheading.getText();
+        String signupTitleLoc = LoginPage.signupTitle();
+        String actual = driver.findElement(By.xpath(signupTitleLoc)).getText();
         Assert.assertEquals(actual, expected);
-        System.out.println(titleheading);
+        System.out.println(actual);
     }
 
     @Test
@@ -113,8 +120,11 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
 
         String expected = "Please enter valid phone number";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        String actual = elem.getText();
+        String errorPopupLoc = LoginPage.errorPopup1();
+        String actual = driver.findElement(By.xpath(errorPopupLoc)).getText();
+
+//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
         LoginPage.clickClose(driver);
     }
@@ -126,8 +136,11 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
 
         String expected = "Please enter valid 6 digit password";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        String actual = elem.getText();
+        String errorPopup3Loc = LoginPage.errorPopup3();
+        String actual = driver.findElement(By.xpath(errorPopup3Loc)).getText();
+
+//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
     }
@@ -139,8 +152,11 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
 
         String expected = "Please enter valid 6 digit password";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        String actual = elem.getText();
+        String errorPopup3Loc = LoginPage.errorPopup3();
+        String actual = driver.findElement(By.xpath(errorPopup3Loc)).getText();
+
+//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
+//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
     }
@@ -152,26 +168,29 @@ public class SanityTest extends BaseTest {
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
 
-        WebElement elem = utils.waitForElement(
-                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
+//        WebElement elem = utils.waitForElement(
+//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
         String expected1 = "Science";
-        String actual1 = elem.getText();
+        String scLoc = DashboardPracticePage.sc();
+        String actual1 = driver.findElement(By.xpath(scLoc)).getText();
         Assert.assertEquals(actual1, expected1);
-        elem.click();
+        DashboardPracticePage.clickScience(driver);
 
-        elem = utils.waitForElement(
-                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[3]/span[1]");
+//        elem = utils.waitForElement(
+//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[3]/span[1]");
         String expected2 = "Mathematics";
-        String actual2 = elem.getText();
+        String mathLoc = DashboardPracticePage.math();
+        String actual2 = driver.findElement(By.xpath(mathLoc)).getText();
         Assert.assertEquals(actual2, expected2);
-        elem.click();
+        DashboardPracticePage.clickMathematics(driver);
 
-        elem = utils.waitForElement(
-                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[4]/span[1]");
+//        elem = utils.waitForElement(
+//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[4]/span[1]");
         String expected3 = "English";
-        String actual3 = elem.getText();
+        String engLoc = DashboardPracticePage.eng();
+        String actual3 = driver.findElement(By.xpath(engLoc)).getText();
         Assert.assertEquals(actual3, expected3);
-        elem.click();
+        DashboardPracticePage.clickEnglish(driver);
 
         //check test details
         WebElement testDetails = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-14euyd\"]"));

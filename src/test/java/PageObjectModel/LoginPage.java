@@ -53,4 +53,19 @@ public class LoginPage extends AbstractPage {
         return "//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button";
     }
 
+    public static String errorPopup1(){
+        return "//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]";
+    }
+
+    public static String errorPopup2(){
+        return "//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]";
+    }
+
+    public static String errorPopup3(){
+        return "//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]";
+    }
+
+    public static String signupTitle(){
+        return "//div[@class=\"MuiBox-root css-10ay245\"]";
+    }
 }
