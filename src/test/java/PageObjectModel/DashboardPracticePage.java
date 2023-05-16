@@ -48,4 +48,8 @@ public class DashboardPracticePage extends AbstractPage {
 
         By subjectScience = By.xpath("//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
     }
+
+    public static void clickParent(WebDriver driver){
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div[3]/div/button")).click();
+    }
 }

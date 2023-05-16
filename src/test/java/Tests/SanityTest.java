@@ -2,12 +2,15 @@ package Tests;
 
 import PageObjectModel.DashboardPracticePage;
 import PageObjectModel.LoginPage;
+import PageObjectModel.OnboardingPage;
 import PageObjectModel.ProfilePage;
 import Utils.Utils;
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -24,7 +27,7 @@ public class SanityTest extends BaseTest {
     public void launchBrowser() {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
+        options.addArguments("--headless", "--disable-gpu", "window-size=1920x1080");  // TODO: don't forget to uncomment while doing git push
         //options.addArguments("window-size=1920x1080");
         options.addArguments("--remote-allow-origins=*");
 
@@ -163,13 +166,96 @@ public class SanityTest extends BaseTest {
 
     @Test
     public void login() throws InterruptedException {
+        LoginPage.enterLogin(driver, "8787554083");
+        LoginPage.enterPassword(driver, "123456");
+        LoginPage.clickLogin(driver);
+        Thread.sleep(2000);
+        String expectedUrl = "https://uat.liveolympiad.org/parent";
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualUrl, expectedUrl);
+
+        String addChildLoc = LoginPage.addChildren();
+        String expectedName = "Add Children";
+        String actualName = driver.findElement(By.xpath(addChildLoc)).getText();
+        Assert.assertEquals(actualName, expectedName);
+        LoginPage.clickAddChild(driver);
+        Thread.sleep(2000);
+
+        String schoolTitleLoc = OnboardingPage.schoolTitle();
+        String expectedStitle = "School Details";
+        String actualStitle = driver.findElement(By.xpath(schoolTitleLoc)).getText();
+        Assert.assertEquals(actualStitle, expectedStitle);
+
+        String schoolDropLoc = OnboardingPage.schoolDropdown();
+        WebElement schoolDD = driver.findElement(By.xpath(schoolDropLoc));
+        Assert.assertTrue(schoolDD.isEnabled(), "school Dropdown is enabled");
+        Thread.sleep(3000);
+        schoolDD.click();
+        Thread.sleep(5000);
+//        OnboardingPage.clickSchoolOpt(driver);
+
+        String classDropLoc = OnboardingPage.classDropDown();
+        WebElement classDD = driver.findElement(By.xpath(classDropLoc));
+        Assert.assertTrue(schoolDD.isEnabled(), "class Dropdown is enabled");
+        Thread.sleep(3000);
+        classDD.click();
+        Thread.sleep(3000);
+//        OnboardingPage.clickClassOpt(driver);
+
+        // TODO: <<<<<<<<school details will be added manually for now>>>>>>>>>>
+
+//        String sectionLoc = OnboardingPage.sectionField();
+//        WebElement sectionField = driver.findElement(By.id(sectionLoc));
+//        Assert.assertTrue(sectionField.isEnabled(), "school Dropdown is enabled");
+//        Thread.sleep(3000);
+        //sectionField.sendKeys("B");
+        OnboardingPage.clickNext(driver);
+        Thread.sleep(2000);
+
+        String personalDLoc = OnboardingPage.personalTitle();
+        String expectedPTitle = "Personal Details";
+        String actualPTitle = driver.findElement(By.xpath(personalDLoc)).getText();
+        Assert.assertEquals(actualPTitle, expectedPTitle);
+        Thread.sleep(10000);
+
+        // TODO: <<<<<<<< Personal details will be added manually for now >>>>>>>>>>
+//        String nameFieldLoc = OnboardingPage.nameField();
+//        WebElement nameField = driver.findElement(By.xpath(nameFieldLoc));
+//        Assert.assertTrue(nameField.isEnabled(), "Name field is enabled");
+//        OnboardingPage.nameFieldInput(driver, "testname");
+//
+//        String genderFieldLoc = OnboardingPage.genderField();
+//        WebElement genderField = driver.findElement(By.xpath(genderFieldLoc));
+//        Assert.assertTrue(genderField.isEnabled(), "gender field is enabled");
+//        genderField.click();
+//        Thread.sleep(5000);
+        // TODO: <<<<<<<< gender will be selected manually for now >>>>>>>>>>
+
+//        String rollNoLoc = OnboardingPage.rollNoField();
+//        WebElement rollNoField = driver.findElement(By.xpath(rollNoLoc));
+//        Assert.assertTrue(rollNoField.isEnabled(), "gender field is enabled");
+//        rollNoField.sendKeys("21");
+//        Thread.sleep(2000);
+        OnboardingPage.clickNext2(driver);
+        Thread.sleep(2000);
+        OnboardingPage.clickSkip(driver);
+
+        LoginPage.clickCardEnter(driver);
+        Thread.sleep(2000);
+
+        String expectedDashUrl = "https://uat.liveolympiad.org/dashboard";
+        String actualDashUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualDashUrl, expectedDashUrl);
+
+        DashboardPracticePage.clickParent(driver);
+    }
+
+    @Test(enabled = false)
+    public void Oldlogin() throws InterruptedException {
         LoginPage.enterLogin(driver, "9958895489");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
         Thread.sleep(2000);
-
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[2]/span[1]");
         String expected1 = "Science";
         String scLoc = DashboardPracticePage.sc();
         String actual1 = driver.findElement(By.xpath(scLoc)).getText();

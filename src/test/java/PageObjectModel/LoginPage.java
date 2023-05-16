@@ -68,4 +68,18 @@ public class LoginPage extends AbstractPage {
     public static String signupTitle(){
         return "//div[@class=\"MuiBox-root css-10ay245\"]";
     }
+
+    public static String addChildren(){
+        return "//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[5]";
+    }
+
+    public static void clickAddChild(WebDriver driver){
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[5]")).click();
+    }
+
+    public static void clickCardEnter(WebDriver driver){
+        driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[4]/div[1]/div/div[2]/button")).click();
+    }
+
 }
