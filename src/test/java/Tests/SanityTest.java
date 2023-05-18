@@ -17,6 +17,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.Browser.CHROME;
@@ -189,53 +192,55 @@ public class SanityTest extends BaseTest {
         String schoolDropLoc = OnboardingPage.schoolDropdown();
         WebElement schoolDD = driver.findElement(By.xpath(schoolDropLoc));
         Assert.assertTrue(schoolDD.isEnabled(), "school Dropdown is enabled");
-        Thread.sleep(3000);
         schoolDD.click();
-        Thread.sleep(5000);
-//        OnboardingPage.clickSchoolOpt(driver);
+        OnboardingPage.clickSchoolOpt(driver);
 
         String classDropLoc = OnboardingPage.classDropDown();
         WebElement classDD = driver.findElement(By.xpath(classDropLoc));
         Assert.assertTrue(schoolDD.isEnabled(), "class Dropdown is enabled");
-        Thread.sleep(3000);
         classDD.click();
-        Thread.sleep(3000);
-//        OnboardingPage.clickClassOpt(driver);
+        OnboardingPage.clickClassOpt(driver);
 
         // TODO: <<<<<<<<school details will be added manually for now>>>>>>>>>>
 
-//        String sectionLoc = OnboardingPage.sectionField();
-//        WebElement sectionField = driver.findElement(By.id(sectionLoc));
-//        Assert.assertTrue(sectionField.isEnabled(), "school Dropdown is enabled");
-//        Thread.sleep(3000);
-        //sectionField.sendKeys("B");
+        String sectionLoc = OnboardingPage.sectionField();
+        WebElement sectionField = driver.findElement(By.id(sectionLoc));
+        Assert.assertTrue(sectionField.isEnabled(), "section is enabled");
+        OnboardingPage.sectionFieldInput(driver, "B");
         OnboardingPage.clickNext(driver);
-        Thread.sleep(2000);
 
         String personalDLoc = OnboardingPage.personalTitle();
         String expectedPTitle = "Personal Details";
         String actualPTitle = driver.findElement(By.xpath(personalDLoc)).getText();
         Assert.assertEquals(actualPTitle, expectedPTitle);
-        Thread.sleep(10000);
 
         // TODO: <<<<<<<< Personal details will be added manually for now >>>>>>>>>>
-//        String nameFieldLoc = OnboardingPage.nameField();
-//        WebElement nameField = driver.findElement(By.xpath(nameFieldLoc));
-//        Assert.assertTrue(nameField.isEnabled(), "Name field is enabled");
-//        OnboardingPage.nameFieldInput(driver, "testname");
-//
-//        String genderFieldLoc = OnboardingPage.genderField();
-//        WebElement genderField = driver.findElement(By.xpath(genderFieldLoc));
-//        Assert.assertTrue(genderField.isEnabled(), "gender field is enabled");
-//        genderField.click();
-//        Thread.sleep(5000);
+        String nameFieldLoc = OnboardingPage.nameField();
+        WebElement nameField = driver.findElement(By.xpath(nameFieldLoc));
+        Assert.assertTrue(nameField.isEnabled(), "Name field is enabled");
+        OnboardingPage.nameFieldInput(driver, "testname");
+
+        String genderFieldLoc = OnboardingPage.genderField();
+        WebElement genderField = driver.findElement(By.xpath(genderFieldLoc));
+        Assert.assertTrue(genderField.isEnabled(), "gender field is enabled");
+        genderField.click();
+        OnboardingPage.genderOpt(driver);
+        Thread.sleep(5000);
         // TODO: <<<<<<<< gender will be selected manually for now >>>>>>>>>>
 
-//        String rollNoLoc = OnboardingPage.rollNoField();
-//        WebElement rollNoField = driver.findElement(By.xpath(rollNoLoc));
-//        Assert.assertTrue(rollNoField.isEnabled(), "gender field is enabled");
-//        rollNoField.sendKeys("21");
-//        Thread.sleep(2000);
+        String rollNoLoc = OnboardingPage.rollNoField();
+        WebElement rollNoField = driver.findElement(By.xpath(rollNoLoc));
+        Assert.assertTrue(rollNoField.isEnabled(), "gender field is enabled");
+        OnboardingPage.rollNoInput(driver, "21");
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy ");
+        Date dateSet = new Date();
+
+        String date1= dateFormat.format(dateSet);
+        OnboardingPage.dateInput(driver, date1);
+
+        //OnboardingPage.enterEmail(driver, "office@digishaala.com");
+
         OnboardingPage.clickNext2(driver);
         Thread.sleep(2000);
         OnboardingPage.clickSkip(driver);
