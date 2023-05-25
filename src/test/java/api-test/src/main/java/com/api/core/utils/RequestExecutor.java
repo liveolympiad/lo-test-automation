@@ -20,8 +20,7 @@ public class RequestExecutor {
      */
     public Response executeRequest(Request request) throws Exception {
         System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-        System.setProperty(
-                "jdk.tls.client.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+        System.setProperty("jdk.tls.client.protocols", "TLSv1,TLSv1.1,TLSv1.2");
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification requestSpecification = generateRequestSpec(request);
         Response response = given().spec(requestSpecification).request(request.getRequestType());
