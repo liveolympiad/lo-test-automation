@@ -13,7 +13,6 @@ public class ExtentManager {
     public static ExtentReports getInstance() {
         if (extent == null)
             createInstance("target/extent.html");
-
         return extent;
     }
 
