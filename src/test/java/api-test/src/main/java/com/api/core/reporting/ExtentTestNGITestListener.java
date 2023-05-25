@@ -71,11 +71,10 @@ public class ExtentTestNGITestListener implements ITestListener {
     }
 
     private synchronized void appendTestInfoInReport(Status testStatus, ITestResult iTestResult) {
-        String requestUrl = null;
         Request request = (Request) iTestResult.getTestContext().getAttribute(RequestConstants.REQUEST);
         Response response = (Response)  iTestResult.getTestContext().getAttribute(ResponseConstants.RESPONSE);
         Long timer = (Long) iTestResult.getTestContext().getAttribute(ResponseConstants.RESPONSE_TIME);
-        requestUrl = request.getBaseUrl() +request.getApiPath()+"/?";
+        String requestUrl = request.getBaseUrl() + request.getApiPath() + "/?";
         if (request.getQueryParameters() != null)
             requestUrl += request.getQueryParameters().toString();
         test.get().log(testStatus, requestUrl);

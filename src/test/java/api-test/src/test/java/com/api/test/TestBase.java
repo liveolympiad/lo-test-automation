@@ -54,10 +54,7 @@ public class TestBase{
 
 
     public float roundoffAndReturn(float d) {
-
         return (float) (Math.round(d * 100.0) / 100.0);
-
-
     }
 
 }

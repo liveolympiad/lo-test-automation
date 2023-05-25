@@ -29,7 +29,6 @@ public class WheatherApiTest extends TestBase {
     public void init() {
         requestExecutor = new RequestExecutor();
         RestAssured.defaultParser = Parser.JSON;
-
     }
 
     /** +

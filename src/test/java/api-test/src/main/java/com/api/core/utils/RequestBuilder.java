@@ -15,9 +15,9 @@ public class RequestBuilder {
 
     public String ApiPath;
     public Method RequestType;
-    public Map<String, String> Headers;
-    public String ContentType;
-    public String RequestBody;
+    private Map<String, String> Headers;
+    private String ContentType;
+    private String RequestBody;
 
     public String BaseUrl;
     public int Port;
@@ -34,7 +34,6 @@ public class RequestBuilder {
     }
 
     public Request buildRequestObject() {
-
         return new Request(BaseUrl,ApiPath, RequestType, Headers, RequestBody, QueryParameters,ContentType
                 );
     }
