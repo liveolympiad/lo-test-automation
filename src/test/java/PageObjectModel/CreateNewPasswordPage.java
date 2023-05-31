@@ -7,6 +7,25 @@ import org.openqa.selenium.WebElement;
 
 public class CreateNewPasswordPage extends AbstractPage {
 
+    public static String titlePage(){
+        return "//div[@class='MuiBox-root css-1m4el6g']";
+    }
+
+    public static String confirmButtonPath(){
+        return "//button[@id='clicked']";
+    }
+
+    public static String viewPw(){
+        return "//button[@aria-label='toggle password visibility']";
+    }
+
+    public static String errorPopup1(){
+        return "//div[@class='MuiAlert-message css-1xsto0d']";
+    }
+
+    public static String errorPopup2(){
+        return "//div[@class='MuiAlert-message css-1xsto0d']";
+    }
     public static void enterNewpass(WebDriver driver, String newPass) throws InterruptedException{
         WebElement elem = driver.findElement(By.xpath(
                 "//input[@id=':r0:']"));

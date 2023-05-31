@@ -3,7 +3,9 @@ package Tests;
 import PageObjectModel.CreateNewPasswordPage;
 import PageObjectModel.ForgotPasswordPage;
 import PageObjectModel.MobileVerification;
+import PageObjectModel.OnboardingPage;
 import Utils.Utils;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -53,22 +55,27 @@ public class ForgotPassword extends BaseTest {
         System.out.println(driver.getCurrentUrl());
 
         //verify title
-        String expected = "Forgot Password?";
-        WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-1w1n69t\"]"));
-        String actual = titleheading.getText();
-        Assert.assertEquals(actual, expected);
+
+        String ForgotPwTitleLoc = ForgotPasswordPage.pageTitle();
+        String expectedFtitle = "Forgot Password?";
+        String actualFtitle = driver.findElement(By.xpath(ForgotPwTitleLoc)).getText();
+        Assert.assertEquals(actualFtitle, expectedFtitle);
         Thread.sleep(6000);
 
-        String expectedtext = "No worries, You can reset your password by verifying your Phone Number with an OTP.";
-        WebElement text = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-18ailey\"]"));
-        String actualText = text.getText();
-        Assert.assertEquals(actualText, expectedtext);
+        String textLoc = ForgotPasswordPage.textName();
+        String expectedText = "No worries, You can reset your password by verifying your Phone Number with an OTP.";
+        String actualText = driver.findElement(By.xpath(textLoc)).getText();
+        Assert.assertEquals(actualText, expectedText);
+        Thread.sleep(6000);
 
-        WebElement phoneNo = driver.findElement(By.xpath("//div[@class=\"MuiFormControl-root MuiTextField-root css-1wptnvt\"]"));
+        String fieldLoc = ForgotPasswordPage.fieldForgotPw();
+        WebElement phoneNo = driver.findElement(By.xpath(fieldLoc));
+        //WebElement phoneNo = driver.findElement(By.xpath("//div[@class=\"MuiFormControl-root MuiTextField-root css-1wptnvt\"]"));
         Assert.assertTrue(phoneNo.isEnabled(), "Phone number field is enabled");
 
-        WebElement button = driver.findElement(By.xpath("//button[@id=\"clicked\"]"));
-        Assert.assertTrue(button.isEnabled(), "Next button is enabled");
+        String buttonLoc = ForgotPasswordPage.buttonPath();
+        WebElement buttonF = driver.findElement(By.xpath(buttonLoc));
+        Assert.assertTrue(buttonF.isEnabled(), "Next button is enabled");
 
     }
 
@@ -78,10 +85,10 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.forgotPasswordFields(driver, "");
         ForgotPasswordPage.clickNext(driver);
 
+        String errorLoc = ForgotPasswordPage.noUserExistPath();
         String expected = "No User exists with given email or phone number";
-        WebElement text = driver.findElement(By.xpath("//div[@class=\"MuiAlert-message css-1xsto0d\"]"));
-        String actual = text.getText();
-        Assert.assertEquals(actual, expected);
+        String actualText = driver.findElement(By.xpath(errorLoc)).getText();
+        Assert.assertEquals(actualText, expected);
 
         ForgotPasswordPage.clickClosePopup(driver);
 
@@ -93,10 +100,10 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.forgotPasswordFields(driver, "8014114915");
         ForgotPasswordPage.clickNext(driver);
 
+        String errorLoc = ForgotPasswordPage.noUserExistPath();
         String expected = "No User exists with given email or phone number";
-        WebElement text = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
-        String actual = text.getText();
-        Assert.assertEquals(actual, expected);
+        String actualText = driver.findElement(By.xpath(errorLoc)).getText();
+        Assert.assertEquals(actualText, expected);
 
         ForgotPasswordPage.clickClosePopup(driver);
     }
@@ -107,10 +114,10 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.forgotPasswordFields(driver, "123456");
         ForgotPasswordPage.clickNext(driver);
 
+        String errorLoc = ForgotPasswordPage.noUserExistPath();
         String expected = "No User exists with given email or phone number";
-        WebElement text = driver.findElement(By.xpath("//div[@class=\"MuiAlert-message css-1xsto0d\"]"));
-        String actual = text.getText();
-        Assert.assertEquals(actual, expected);
+        String actualText = driver.findElement(By.xpath(errorLoc)).getText();
+        Assert.assertEquals(actualText, expected);
 
         ForgotPasswordPage.clickClosePopup(driver);
     }
@@ -122,14 +129,16 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.clickNext(driver);
 
         String expected = "Mobile Verification";
-        WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-1cs5gre\"]"));
-        String actual = titleheading.getText();
+        String titleLoc = MobileVerification.mobileVtitle();
+        //WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-1cs5gre\"]"));
+        String actual = driver.findElement(By.xpath(titleLoc)).getText();
         Assert.assertEquals(actual, expected);
 
         System.out.println("Mobile Verification: " + driver.getCurrentUrl());
         Thread.sleep(2000);
 
-        WebElement verifybtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[4]/div/button"));
+        String buttonLoc = MobileVerification.verifyButton();
+        WebElement verifybtn = driver.findElement(By.xpath(buttonLoc));
         Assert.assertTrue(verifybtn.isEnabled(), "Verify button is enabled");
         Thread.sleep(1000);
         WebElement resendbtn = driver.findElement(By.linkText("Resend"));
@@ -141,9 +150,9 @@ public class ForgotPassword extends BaseTest {
             System.out.println("FAIL: RESEND BUTTON IS NOT PRESENT");
         }
         resendbtn.click();
+        String msgLoc = MobileVerification.successMsgOTP();
         String expectedtex = "Successfully Initiated OTP";
-        WebElement resendtext = driver.findElement(By.xpath("//div[@class=\"MuiAlert-message css-1xsto0d\"]"));
-        String actualtex = resendtext.getText();
+        String actualtex = driver.findElement(By.xpath(msgLoc)).getText();
         Assert.assertEquals(actualtex, expectedtex);
         Thread.sleep(5000);
 //        verifybtn.click();
@@ -154,9 +163,10 @@ public class ForgotPassword extends BaseTest {
 
         MobileVerification.otpfields(driver, "123456");
         MobileVerification.clickVerify(driver);
+
+        String invalidOtpLoc = MobileVerification.invalidOTP();
         String expectedtext = "Invalid otp";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
-        String actualtext = elem.getText();
+        String actualtext = driver.findElement(By.xpath(invalidOtpLoc)).getText();
         Assert.assertEquals(actualtext, expectedtext);
         Thread.sleep(2000);
     }
@@ -165,9 +175,10 @@ public class ForgotPassword extends BaseTest {
     public void verifyEmptyOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "");
         MobileVerification.clickVerify(driver);
+
+        String invalidOtpLoc = MobileVerification.invalidOTP();
         String expectedtext = "Invalid otp";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
-        String actualtext = elem.getText();
+        String actualtext = driver.findElement(By.xpath(invalidOtpLoc)).getText();
         Assert.assertEquals(actualtext, expectedtext);
         Thread.sleep(1000);
     }
@@ -176,9 +187,10 @@ public class ForgotPassword extends BaseTest {
     public void verifyInvalidOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "12");
         MobileVerification.clickVerify(driver);
+
+        String invalidOtpLoc = MobileVerification.invalidOTP();
         String expectedtext = "Invalid otp";
-        WebElement elem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[3]/div/div/div/div[6]/div/div[2]"));
-        String actualtext = elem.getText();
+        String actualtext = driver.findElement(By.xpath(invalidOtpLoc)).getText();
         Assert.assertEquals(actualtext, expectedtext);
         Thread.sleep(1000);
 //        MobileVerification.clickVerify(driver);
@@ -202,21 +214,23 @@ public class ForgotPassword extends BaseTest {
 
     @Test(priority = 10)
     public void verifyCreateNewPwPage() throws InterruptedException {
+        String titleLoc = CreateNewPasswordPage.titlePage();
         String expectedtitle = "Create New Password";
-        WebElement titleheading = driver.findElement(By.xpath
-                ("//div[@class='MuiBox-root css-1m4el6g']"));
-        String actualtitle = titleheading.getText();
+        String actualtitle = driver.findElement(By.xpath(titleLoc)).getText();
         Assert.assertEquals(actualtitle, expectedtitle);
 
-        WebElement confirmPass = driver.findElement(By.xpath("//button[@id='clicked']"));
+        String confimBtnLoc = CreateNewPasswordPage.confirmButtonPath();
+        //WebElement confirmPass = driver.findElement(By.xpath("//button[@id='clicked']"));
         String expectedName = "Confirm Password";
-        String actualName = confirmPass.getText();
+        String actualName = driver.findElement(By.xpath(confimBtnLoc)).getText();
         Assert.assertEquals(actualName, expectedName);
+        WebElement confirmPass = driver.findElement(By.xpath(confimBtnLoc));
         Assert.assertTrue(confirmPass.isEnabled(), "Verify button is enabled");
 
-        WebElement viewPass = driver.findElement(By.xpath("//button[@aria-label='toggle password visibility']"));
-        Assert.assertTrue(confirmPass.isDisplayed(), "View Password button is displayed");
-        Assert.assertTrue(confirmPass.isEnabled(), "View Password is enabled");
+        String viewPwLoc = CreateNewPasswordPage.viewPw();
+        WebElement viewPass = driver.findElement(By.xpath(viewPwLoc));
+        Assert.assertTrue(viewPass.isDisplayed(), "View Password button is displayed");
+        Assert.assertTrue(viewPass.isEnabled(), "View Password is enabled");
 
     }
 
@@ -226,9 +240,9 @@ public class ForgotPassword extends BaseTest {
         CreateNewPasswordPage.enterConfirmpass(driver, "");
         CreateNewPasswordPage.clickConfirm(driver);
 
-        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String errorPopup1Loc = CreateNewPasswordPage.errorPopup1();
         String expected = "Please enter valid 6 digit password";
-        String actual = error.getText();
+        String actual = driver.findElement(By.xpath(errorPopup1Loc)).getText();
         Assert.assertEquals(actual, expected);
 
         CreateNewPasswordPage.clickClosePopup(driver);
@@ -241,9 +255,9 @@ public class ForgotPassword extends BaseTest {
         CreateNewPasswordPage.viewPassword(driver);
         CreateNewPasswordPage.clickConfirm(driver);
 
-        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String errorPopup2Loc = CreateNewPasswordPage.errorPopup2();
         String expected = "Passwords do not match";
-        String actual = error.getText();
+        String actual = driver.findElement(By.xpath(errorPopup2Loc)).getText();
         Assert.assertEquals(actual, expected);
 
         CreateNewPasswordPage.clickClosePopup(driver);
@@ -257,9 +271,9 @@ public class ForgotPassword extends BaseTest {
         CreateNewPasswordPage.viewPassword(driver);
         CreateNewPasswordPage.clickConfirm(driver);
 
-        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String errorPopup1Loc = CreateNewPasswordPage.errorPopup1();
         String expected = "Please enter valid 6 digit password";
-        String actual = error.getText();
+        String actual = driver.findElement(By.xpath(errorPopup1Loc)).getText();
         Assert.assertEquals(actual, expected);
 
         CreateNewPasswordPage.clickClosePopup(driver);
@@ -286,10 +300,11 @@ public class ForgotPassword extends BaseTest {
         CreateNewPasswordPage.viewPassword(driver);
         CreateNewPasswordPage.clickConfirm(driver);
 
-        WebElement error = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String errorPopup1Loc = CreateNewPasswordPage.errorPopup1();
         String expected = "Please enter valid 6 digit password";
-        String actual = error.getText();
+        String actual = driver.findElement(By.xpath(errorPopup1Loc)).getText();
         Assert.assertEquals(actual, expected);
+
 //        WebElement validation = driver.findElement(By.xpath("//div[@class='MuiBox-root css-0']"));
 //        String expectedvalidation = "Password must be of 6 characters and combination of numbers only";
 //        String actualvalidation = validation.getText();
