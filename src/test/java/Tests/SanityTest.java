@@ -61,9 +61,6 @@ public class SanityTest extends BaseTest {
             if (driver.findElements(By.xpath(logoutButtonLoc)).size() != 0) {
                 driver.findElement(By.xpath(logoutButtonLoc)).click();
                 Thread.sleep(2000);
-                //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//                WebElement elem = utils.waitForElement(logoutButtonLoc);
-//                elem.click();
             }
         }
     }
@@ -73,12 +70,6 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "");
         LoginPage.enterPassword(driver, "123455");
         LoginPage.clickLogin(driver);
-        //Thread.sleep(2000);
-//        WebElement elem = utils.waitForElement(
-//                "//*[@id=\"clicked\"]");
-//
-//        elem.click();
-        //Thread.sleep(5000);
         String expected = "Please enter valid phone number";
         String errorPopupLoc = LoginPage.errorPopup1();
         String actual = driver.findElement(By.xpath(errorPopupLoc)).getText();
@@ -98,8 +89,6 @@ public class SanityTest extends BaseTest {
         String expected = "Incorrect password";
         String errorPopup2Loc = LoginPage.errorPopup2();
         String actual = driver.findElement(By.xpath(errorPopup2Loc)).getText();
-        //WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-        //String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Incorrect password");
         LoginPage.clickClose(driver);
     }
@@ -109,10 +98,7 @@ public class SanityTest extends BaseTest {
         LoginPage.enterLogin(driver, "9953895499");
         LoginPage.enterPassword(driver, "123456");
         LoginPage.clickLogin(driver);
-        //Thread.sleep(2000);
         String expected = "Sign Up";
-        //WebElement titleheading = driver.findElement(By.xpath("//div[@class=\"MuiBox-root css-10ay245\"]"));
-        //String actual = titleheading.getText();
         String signupTitleLoc = LoginPage.signupTitle();
         String actual = driver.findElement(By.xpath(signupTitleLoc)).getText();
         Assert.assertEquals(actual, expected);
@@ -128,9 +114,6 @@ public class SanityTest extends BaseTest {
         String expected = "Please enter valid phone number";
         String errorPopupLoc = LoginPage.errorPopup1();
         String actual = driver.findElement(By.xpath(errorPopupLoc)).getText();
-
-//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid phone number");
         LoginPage.clickClose(driver);
     }
@@ -144,9 +127,6 @@ public class SanityTest extends BaseTest {
         String expected = "Please enter valid 6 digit password";
         String errorPopup3Loc = LoginPage.errorPopup3();
         String actual = driver.findElement(By.xpath(errorPopup3Loc)).getText();
-
-//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
     }
@@ -160,9 +140,6 @@ public class SanityTest extends BaseTest {
         String expected = "Please enter valid 6 digit password";
         String errorPopup3Loc = LoginPage.errorPopup3();
         String actual = driver.findElement(By.xpath(errorPopup3Loc)).getText();
-
-//        WebElement elem = driver.findElement(By.xpath("//*[@id=\"simple-tabpanel-0\"]/div/div/div[2]/div/div[2]"));
-//        String actual = elem.getText();
         Assert.assertEquals(actual, expected, "Error: Please enter valid 6 digit password");
         LoginPage.clickClose(driver);
     }
@@ -266,17 +243,12 @@ public class SanityTest extends BaseTest {
         String actual1 = driver.findElement(By.xpath(scLoc)).getText();
         Assert.assertEquals(actual1, expected1);
         DashboardPracticePage.clickScience(driver);
-
-//        elem = utils.waitForElement(
-//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[3]/span[1]");
         String expected2 = "Mathematics";
         String mathLoc = DashboardPracticePage.math();
         String actual2 = driver.findElement(By.xpath(mathLoc)).getText();
         Assert.assertEquals(actual2, expected2);
         DashboardPracticePage.clickMathematics(driver);
 
-//        elem = utils.waitForElement(
-//                "//*[@id=\"root\"]/div/div[3]/div/div[1]/div[1]/div[1]/div/div/div/div[4]/span[1]");
         String expected3 = "English";
         String engLoc = DashboardPracticePage.eng();
         String actual3 = driver.findElement(By.xpath(engLoc)).getText();
@@ -288,12 +260,6 @@ public class SanityTest extends BaseTest {
         testDetails.getText();
         testDetails.isDisplayed();
 
-        //DashboardPracticePage.clickFilterDropD(driver);
-//        WebElement identifier = driver.findElement(By.xpath("//*[@id=\"dropmenu\"]/div[3]/ul/li[1]"));
-//        Select select = new Select(identifier);
-//        select.selectByIndex(1);
-        //select.selectByVisibleText("Pending");
-        //*utils.waitForElement("//*[@id=\"root\"]/div[3]/div/div[5]/div/div[1]/div/div[1]/div", 5000);*/
         DashboardPracticePage.clickAll(driver);
         String expectedTag = driver.findElement(By.xpath(
                 "//div[@class='MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary brb_0 css-65el9p']"))
@@ -301,9 +267,6 @@ public class SanityTest extends BaseTest {
 
         DashboardPracticePage.clickEnter(driver);
         Thread.sleep(10000);
-//        Alert a = driver.switchTo().alert();
-//        System.out.println(a.getText());
-//        a.dismiss();
 
         String actualTag = driver.findElement(By.xpath("//div[@class='MuiBox-root css-1mnln2d']")).getText();
         Assert.assertEquals(actualTag, expectedTag);
@@ -337,8 +300,7 @@ public class SanityTest extends BaseTest {
         Thread.sleep(1000);
         ProfilePage.enterRollno(driver, "12");
         Thread.sleep(1000);
-//        EnterProfileDetails.enterSection(driver, "D");   //help
-//        Thread.sleep(2000);
+
         ProfilePage.enterEmail(driver, "D@gmail.com");
         Thread.sleep(10000);
 
