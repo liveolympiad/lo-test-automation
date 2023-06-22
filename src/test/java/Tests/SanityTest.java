@@ -306,8 +306,8 @@ public class SanityTest extends BaseTest {
 
         savebtn.click();
         String expectedMessage = "Profile Submitted Successfully";
-        WebElement succMess = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
-        String actualMessage = succMess.getText();
+        WebElement success = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
+        String actualMessage = success.getText();
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 //    @Test(priority = 0)
