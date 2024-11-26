@@ -44,7 +44,6 @@ public class ForgotPassword extends BaseTest {
     @AfterTest
     public void terminateBrowser() {
         driver.close();
-
     }
 
     @Test
