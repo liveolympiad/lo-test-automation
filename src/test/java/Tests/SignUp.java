@@ -44,21 +44,16 @@ public class SignUp extends BaseTest {
     @AfterTest
     public void terminateBrowser() {
         driver.close();
-
     }
 
-    @Test(priority = 1)
+    @Test
     public void verifySignUpButton() throws InterruptedException {
-
         WebElement signupbtn = driver.findElement(By.cssSelector("button#scrollable-auto-tab-1"));
         try {
-
             System.out.println("PASS: ELEMENT IS PRESENT");
-
         } catch (Exception e) {
             System.out.println("FAIL: ELEMENT NOT PRESENT");
         }
-
 
         Thread.sleep(2000);
 
@@ -86,18 +81,15 @@ public class SignUp extends BaseTest {
         Assert.assertTrue(driver.findElement(By.xpath("//button[@id='clicked']")).isEnabled(),"Verify signup button is enabled");
 
         Thread.sleep(2000);
-
     }
 
 
-    @Test(priority = 5)
+    @Test
 
     public void verifySignUpRegisteredNo() throws InterruptedException {
-
         SignupPage.enterSignup(driver,"9958895489");
         SignupPage.clickSignup(driver);
         Thread.sleep(1000);
-
 
         String expected = "A user already exists with given email or phone number";
         WebElement elem = driver.findElement(By.xpath("//div[@class='MuiAlert-message css-1xsto0d']"));
@@ -105,13 +97,11 @@ public class SignUp extends BaseTest {
         Assert.assertEquals(actual, expected, "Error: A user already exists with given email or phone number");
         MobileVerification.clickClose(driver);
         Thread.sleep(2000);
-
     }
 
-    @Test(priority = 3)
+    @Test
 
     public void verifySignUpInvalidNumber() throws InterruptedException {
-
         SignupPage.enterSignup(driver,"111");
         SignupPage.clickSignup(driver);
         Thread.sleep(1000);
@@ -124,10 +114,8 @@ public class SignUp extends BaseTest {
         MobileVerification.clickClose(driver);
     }
 
-    @Test(priority = 4)
-
+    @Test
     public void verifySignUpCharPhoneNo() throws InterruptedException {
-
         SignupPage.enterSignup(driver,"8787eeeeee");
         SignupPage.clickSignup(driver);
         Thread.sleep(1000);
@@ -141,7 +129,7 @@ public class SignUp extends BaseTest {
         MobileVerification.clickClose(driver);
     }
 
-    @Test(priority = 2)
+    @Test
     public void verifyEmptyNumber() throws InterruptedException {
 
         SignupPage.enterSignup(driver,"");
@@ -158,7 +146,7 @@ public class SignUp extends BaseTest {
         MobileVerification.clickClose(driver);
     }
 
-    @Test(priority = 6)
+    @Test
     public void verifySignup() throws InterruptedException {
 
         SignupPage.enterSignup(driver, "8794648306");
@@ -166,7 +154,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
 
     }
-    @Test(priority = 7)
+    @Test
     public void verifyMobileVerificationPage() throws InterruptedException {
         System.out.println("Mobile Verification: " + driver.getCurrentUrl());
 
@@ -191,7 +179,7 @@ public class SignUp extends BaseTest {
             System.out.println("FAIL: RESEND BUTTON IS NOT PRESENT");
         }
     }
-    @Test(priority = 9)
+    @Test
     public void verifyIncorrectOTP() throws InterruptedException {
 
         MobileVerification.otpfields(driver, "123456");
@@ -206,7 +194,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 8)
+    @Test
     public void verifyEmptyOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "");
         MobileVerification.clickVerify(driver);
@@ -219,7 +207,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(1000);
     }
 
-    @Test(priority = 10)
+    @Test
     public void verifyInvalidOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "12");
         MobileVerification.clickVerify(driver);
@@ -234,7 +222,7 @@ public class SignUp extends BaseTest {
         //System.out.println("Create New Password : " + driver.getCurrentUrl());
     }
 
-    @Test(priority = 11) //OTP INSERTED MANUALLY FOR NOW
+    @Test //OTP INSERTED MANUALLY FOR NOW
     public void verifyCorrectOTP() throws InterruptedException {
         //MobileVerification.clickResend(driver);
         Thread.sleep(10000);
@@ -243,7 +231,7 @@ public class SignUp extends BaseTest {
 
     }
 
-    @Test(priority = 12)
+    @Test
     public void verifyCreateNewPwPage() throws InterruptedException {
         String expectedtitle = "Create New Password";
         WebElement titleheading = driver.findElement(By.xpath
@@ -263,7 +251,7 @@ public class SignUp extends BaseTest {
 
     }
 
-    @Test(priority = 13)
+    @Test
     public void verifyEmptyPassword() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "");
         CreateNewPasswordPage.enterConfirmpass(driver, "");
@@ -277,7 +265,7 @@ public class SignUp extends BaseTest {
         CreateNewPasswordPage.clickClosePopup(driver);
     }
 
-    @Test(priority = 14)
+    @Test
     public void verifyWrongConfirm() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123456");
         CreateNewPasswordPage.enterConfirmpass(driver, "");
@@ -293,7 +281,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 15)
+    @Test
     public void verifyCharPass() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123aaa");
         CreateNewPasswordPage.enterConfirmpass(driver, "123aaa");
@@ -309,7 +297,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 16)
+    @Test
     public void verify6DigitPassValidation() throws InterruptedException {
 
         WebElement newP = driver.findElement(By.xpath("//input[@id=':r0:']"));
@@ -322,7 +310,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 17)
+    @Test
     public void verifyInvalidPass() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123");
         CreateNewPasswordPage.enterConfirmpass(driver, "123");
@@ -341,7 +329,7 @@ public class SignUp extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 18)
+    @Test
     public void enterPassword() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123456");
         CreateNewPasswordPage.enterConfirmpass(driver, "123456");
@@ -353,7 +341,7 @@ public class SignUp extends BaseTest {
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl);
     }
-    @Test(priority = 19)
+    @Test
     public void verifySchoolDetailsPage() throws InterruptedException {
         String expectedtitle = "School Details";
         WebElement title = driver.findElement(By.xpath("//div[@class='MuiBox-root css-axccz7']"));
