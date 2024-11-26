@@ -47,7 +47,7 @@ public class ForgotPassword extends BaseTest {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void forgotPasswordPage() throws InterruptedException {
         WebElement verifyForgotpw = driver.findElement(By.linkText("Forgot Password?"));
         Assert.assertTrue(verifyForgotpw.isEnabled(), "Forgot Password is active");
@@ -79,7 +79,7 @@ public class ForgotPassword extends BaseTest {
 
     }
 
-    @Test(priority = 2)
+    @Test
     public void forgotpwEmptyNo() throws InterruptedException {
 
         ForgotPasswordPage.forgotPasswordFields(driver, "");
@@ -94,7 +94,7 @@ public class ForgotPassword extends BaseTest {
 
     }
 
-    @Test(priority = 3)
+    @Test
     public void forgotpwUnregisteredNo() throws InterruptedException {
 
         ForgotPasswordPage.forgotPasswordFields(driver, "8014114915");
@@ -108,7 +108,7 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.clickClosePopup(driver);
     }
 
-    @Test(priority = 4)
+    @Test
     public void forgotpwInvalidNo() throws InterruptedException {
 
         ForgotPasswordPage.forgotPasswordFields(driver, "123456");
@@ -122,7 +122,7 @@ public class ForgotPassword extends BaseTest {
         ForgotPasswordPage.clickClosePopup(driver);
     }
 
-    @Test(priority = 5)
+    @Test
     public void forgotpw() throws InterruptedException {
 
         ForgotPasswordPage.forgotPasswordFields(driver, "8787554083");
@@ -158,7 +158,7 @@ public class ForgotPassword extends BaseTest {
 //        verifybtn.click();
     }
 
-    @Test(priority = 7)
+    @Test
     public void verifyIncorrectOTP() throws InterruptedException {
 
         MobileVerification.otpfields(driver, "123456");
@@ -171,7 +171,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 6)
+    @Test
     public void verifyEmptyOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "");
         MobileVerification.clickVerify(driver);
@@ -183,7 +183,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(1000);
     }
 
-    @Test(priority = 8)
+    @Test
     public void verifyInvalidOTP() throws InterruptedException {
         MobileVerification.otpfields(driver, "12");
         MobileVerification.clickVerify(driver);
@@ -197,7 +197,7 @@ public class ForgotPassword extends BaseTest {
 
     }
 
-    @Test(priority = 9) //OTP INSERTED MANUALLY FOR NOW
+    @Test //OTP INSERTED MANUALLY FOR NOW
     public void verifyCorrectOTP() throws InterruptedException {
         MobileVerification.clickResend(driver);
         Thread.sleep(10000);
@@ -212,7 +212,7 @@ public class ForgotPassword extends BaseTest {
         System.out.println("Create New Password : " + driver.getCurrentUrl());
     }
 
-    @Test(priority = 10)
+    @Test
     public void verifyCreateNewPwPage() throws InterruptedException {
         String titleLoc = CreateNewPasswordPage.titlePage();
         String expectedtitle = "Create New Password";
@@ -234,7 +234,7 @@ public class ForgotPassword extends BaseTest {
 
     }
 
-    @Test(priority = 11)
+    @Test
     public void verifyEmptyPassword() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "");
         CreateNewPasswordPage.enterConfirmpass(driver, "");
@@ -248,7 +248,7 @@ public class ForgotPassword extends BaseTest {
         CreateNewPasswordPage.clickClosePopup(driver);
     }
 
-    @Test(priority = 12)
+    @Test
     public void verifyWrongConfirm() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123456");
         CreateNewPasswordPage.enterConfirmpass(driver, "");
@@ -264,7 +264,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 13)
+    @Test
     public void verifyCharPass() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123aaa");
         CreateNewPasswordPage.enterConfirmpass(driver, "123aaa");
@@ -280,7 +280,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 14)
+    @Test
     public void verify6DigitPassValidation() throws InterruptedException {
 
         WebElement newP = driver.findElement(By.xpath("//input[@id=':r0:']"));
@@ -293,7 +293,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 15)
+    @Test
     public void verifyInvalidPass() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123");
         CreateNewPasswordPage.enterConfirmpass(driver, "123");
@@ -313,7 +313,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 16)
+    @Test
     public void enterPassword() throws InterruptedException {
         CreateNewPasswordPage.enterNewpass(driver, "123456");
         CreateNewPasswordPage.enterConfirmpass(driver, "123456");
