@@ -54,7 +54,6 @@ public class ForgotPassword extends BaseTest {
         System.out.println(driver.getCurrentUrl());
 
         //verify title
-
         String ForgotPwTitleLoc = ForgotPasswordPage.pageTitle();
         String expectedFtitle = "Forgot Password?";
         String actualFtitle = driver.findElement(By.xpath(ForgotPwTitleLoc)).getText();
@@ -80,7 +79,6 @@ public class ForgotPassword extends BaseTest {
 
     @Test
     public void forgotpwEmptyNo() throws InterruptedException {
-
         ForgotPasswordPage.forgotPasswordFields(driver, "");
         ForgotPasswordPage.clickNext(driver);
 
@@ -95,7 +93,6 @@ public class ForgotPassword extends BaseTest {
 
     @Test
     public void forgotpwUnregisteredNo() throws InterruptedException {
-
         ForgotPasswordPage.forgotPasswordFields(driver, "8014114915");
         ForgotPasswordPage.clickNext(driver);
 
@@ -109,7 +106,6 @@ public class ForgotPassword extends BaseTest {
 
     @Test
     public void forgotpwInvalidNo() throws InterruptedException {
-
         ForgotPasswordPage.forgotPasswordFields(driver, "123456");
         ForgotPasswordPage.clickNext(driver);
 
@@ -123,7 +119,6 @@ public class ForgotPassword extends BaseTest {
 
     @Test
     public void forgotpw() throws InterruptedException {
-
         ForgotPasswordPage.forgotPasswordFields(driver, "8787554083");
         ForgotPasswordPage.clickNext(driver);
 
@@ -142,9 +137,7 @@ public class ForgotPassword extends BaseTest {
         Thread.sleep(1000);
         WebElement resendbtn = driver.findElement(By.linkText("Resend"));
         try {
-
             System.out.println("PASS: RESEND BUTTON IS PRESENT");
-
         } catch (Exception e) {
             System.out.println("FAIL: RESEND BUTTON IS NOT PRESENT");
         }
@@ -154,12 +147,11 @@ public class ForgotPassword extends BaseTest {
         String actualtex = driver.findElement(By.xpath(msgLoc)).getText();
         Assert.assertEquals(actualtex, expectedtex);
         Thread.sleep(5000);
-//        verifybtn.click();
+        // verifybtn.click();
     }
 
     @Test
     public void verifyIncorrectOTP() throws InterruptedException {
-
         MobileVerification.otpfields(driver, "123456");
         MobileVerification.clickVerify(driver);
 
@@ -323,7 +315,6 @@ public class ForgotPassword extends BaseTest {
         String expectedUrl = "https://app.liveolympiad.org/dashboard";
         String actualUrl = driver.getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl);
-
     }
 
 }
